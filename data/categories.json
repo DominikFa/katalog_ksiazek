@@ -1,10 +1,42 @@
 [
-  { "id": 1, "name": "Fantastyka" },
-  { "id": 2, "name": "Science Fiction" },
-  { "id": 3, "name": "Kryminał" },
-  { "id": 4, "name": "Romans" },
-  { "id": 5, "name": "Literatura faktu" },
-  { "id": 6, "name": "Klasyka" },
-  { "id": 7, "name": "Młodzieżowa" },
-  { "id": 8, "name": "Dziecięca" }
+  {
+    "id": "cat001",
+    "name": "Fantastyka",
+    "description": "Książki oparte na elementach magicznych, światach wymyślonych i nadprzyrodzonych zjawiskach."
+  },
+  {
+    "id": "cat002",
+    "name": "Science Fiction",
+    "description": "Literatura eksplorująca wpływ nauki i technologii na społeczeństwo lub jednostki, często osadzona w przyszłości."
+  },
+  {
+    "id": "cat003",
+    "name": "Kryminał",
+    "description": "Powieści skupiające się na zbrodni, śledztwie i odkrywaniu sprawcy."
+  },
+  {
+    "id": "cat004",
+    "name": "Powieść Historyczna",
+    "description": "Utwory literackie, których akcja rozgrywa się w przeszłości, często z odniesieniami do rzeczywistych wydarzeń i postaci."
+  },
+  {
+    "id": "cat005",
+    "name": "Romans",
+    "description": "Historie miłosne, skupiające się na relacjach romantycznych między bohaterami."
+  },
+  {
+    "id": "cat006",
+    "name": "Literatura Faktu",
+    "description": "Książki oparte na rzeczywistych wydarzeniach, faktach i badaniach, np. biografie, reportaże."
+  },
+  {
+    "id": "cat007",
+    "name": "Thriller psychologiczny",
+    "description": "Powieści budujące napięcie poprzez eksplorację stanów psychicznych bohaterów i złożone intrygi."
+  },
+  {
+    "id": "cat008",
+    "name": "Poezja",
+    "description": "Utwory liryczne wyrażające uczucia i refleksje za pomocą języka artystycznego."
+  }
 ]

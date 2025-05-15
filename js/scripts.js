@@ -14,13 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Active navigation link
     const navLinks = document.querySelectorAll('.nav__list .nav__link');
     navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
-        if (linkPage === currentPage) {
-            if(link) link.classList.add('nav__link--active');
-        } else {
-            if(link) link.classList.remove('nav__link--active');
+        const linkHref = link.getAttribute('href');
+        if (linkHref) {
+            const linkPage = linkHref.split('/').pop();
+            if (linkPage === currentPage) {
+                link.classList.add('nav__link--active');
+            } else {
+                link.classList.remove('nav__link--active');
+            }
         }
     });
+
+    // --- Base URLs for fetching data ---
+    const GITHUB_DATA_BASE_URL = 'https://raw.githubusercontent.com/DominikFa/katalog_ksiazek/master/data/';
+    // Jeśli gałąź główna to 'main', zmień 'master' na 'main' powyżej.
 
     // --- Page Specific Logic ---
 
@@ -40,24 +47,24 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentFilters = { authors: [], tags: [] };
         let currentSort = 'title-asc';
         let currentPageNum = 1;
-        const itemsPerPage = 8; 
+        const itemsPerPage = 8;
 
         async function fetchData() {
             try {
                 const [booksRes, authorsRes] = await Promise.all([
-                    fetch('../data/books.json'),
-                    fetch('../data/authors.json')
+                    fetch(`${GITHUB_DATA_BASE_URL}books.json`),
+                    fetch(`${GITHUB_DATA_BASE_URL}authors.json`)
                 ]);
                 if (!booksRes.ok || !authorsRes.ok) {
-                    throw new Error('Network response was not ok.');
+                    throw new Error(`Network response was not ok. Books status: ${booksRes.status}, Authors status: ${authorsRes.status}`);
                 }
                 allBooks = await booksRes.json();
                 allAuthors = await authorsRes.json();
                 populateFilters();
                 renderCatalog();
             } catch (error) {
-                console.error("Błąd podczas ładowania danych:", error);
-                if(catalogGrid) catalogGrid.innerHTML = "<p>Nie udało się załadować katalogu. Spróbuj ponownie później.</p>";
+                console.error("Błąd podczas ładowania danych katalogu:", error);
+                if(catalogGrid) catalogGrid.innerHTML = `<p>Nie udało się załadować katalogu. Sprawdź konsolę po więcej informacji. Możliwe, że pliki danych nie są dostępne pod wskazanym adresem URL lub gałąź ('master' vs 'main') jest nieprawidłowa.</p><p>Sprawdzane URL: ${GITHUB_DATA_BASE_URL}books.json</p>`;
             }
         }
 
@@ -73,25 +80,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 <li><label><input type="checkbox" name="tag" value="${tag.toLowerCase()}"> ${tag.charAt(0).toUpperCase() + tag.slice(1)}</label></li>
             `).join('');
 
-            // Add event listeners after populating
             document.querySelectorAll('.catalog-sidebar input[type="checkbox"]').forEach(checkbox => {
                 checkbox.addEventListener('change', () => {
-                    // For desktop/tablet, filters might apply immediately or via button
-                    // For mobile, this change will be noted, and applied when "Filtruj" (modal) is confirmed
-                     if (window.innerWidth > 767) { // Apply immediately on desktop if no explicit button or for testing
+                     if (window.innerWidth > 767 || !catalogSidebar.classList.contains('catalog-sidebar--active')) {
                          updateFiltersAndRender();
                      }
                 });
             });
         }
-        
+
         function updateFiltersAndRender() {
             currentFilters.authors = Array.from(document.querySelectorAll('.catalog-sidebar input[name="author"]:checked')).map(cb => parseInt(cb.value));
             currentFilters.tags = Array.from(document.querySelectorAll('.catalog-sidebar input[name="tag"]:checked')).map(cb => cb.value);
-            currentPageNum = 1; 
+            currentPageNum = 1;
             renderCatalog();
             if(catalogSidebar && catalogSidebar.classList.contains('catalog-sidebar--active')){
-                catalogSidebar.classList.remove('catalog-sidebar--active'); // Close mobile filter view
+                catalogSidebar.classList.remove('catalog-sidebar--active');
             }
         }
 
@@ -119,16 +123,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 return authorMatch && tagMatch;
             });
         }
-        
+
         function renderCatalog() {
             if (!catalogGrid) return;
 
             let booksToDisplay = filterBooks(allBooks);
             booksToDisplay = sortBooks(booksToDisplay, currentSort);
-            
+
             const totalItems = booksToDisplay.length;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
-            
+
             const startIndex = (currentPageNum - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const paginatedBooks = booksToDisplay.slice(startIndex, endIndex);
@@ -154,55 +158,47 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             renderPagination(totalPages);
         }
-        
+
         function renderPagination(totalPages) {
             if (!paginationControls) return;
-            paginationControls.innerHTML = ''; // Clear previous pagination
-            if (totalPages <= 1) return; // No pagination if only one page or less
+            paginationControls.innerHTML = '';
+            if (totalPages <= 1) return;
 
             let paginationHTML = '';
-            const maxVisibleButtons = 5; // Including current, ellipsis, first/last
+            const maxVisibleButtons = 5;
 
             if (totalPages <= maxVisibleButtons) {
                 for (let i = 1; i <= totalPages; i++) {
                     paginationHTML += `<a href="#" class="pagination__link ${i === currentPageNum ? 'pagination__link--active' : ''}" data-page="${i}">${i}</a>`;
                 }
             } else {
-                // Previous Button
-                // paginationHTML += `<a href="#" class="pagination__link" data-page="${Math.max(1, currentPageNum - 1)}">&lt;</a>`;
-
-                // Page 1
                 paginationHTML += `<a href="#" class="pagination__link ${1 === currentPageNum ? 'pagination__link--active' : ''}" data-page="1">1</a>`;
-
-                let startEllipsis = false;
-                let endEllipsis = false;
-
-                if (currentPageNum > 3) {
-                    paginationHTML += `<span class="pagination__ellipsis">...</span>`;
-                    startEllipsis = true;
-                }
 
                 let pageStart = Math.max(2, currentPageNum - 1);
                 let pageEnd = Math.min(totalPages - 1, currentPageNum + 1);
 
-                if(currentPageNum === 1) pageEnd = Math.min(totalPages -1, 3);
-                if(currentPageNum === totalPages) pageStart = Math.max(2, totalPages -2);
+                if (currentPageNum <= 3) { // Near the beginning
+                    pageStart = 2;
+                    pageEnd = Math.min(totalPages -1, 1 + (maxVisibleButtons - 3)); // 1 (first) + ... + pages + last
+                } else if (currentPageNum >= totalPages - 2) { // Near the end
+                    pageEnd = totalPages -1;
+                    pageStart = Math.max(2, totalPages - (maxVisibleButtons - 3));
+                }
 
+
+                if (pageStart > 2) {
+                    paginationHTML += `<span class="pagination__ellipsis">...</span>`;
+                }
 
                 for (let i = pageStart; i <= pageEnd; i++) {
                      paginationHTML += `<a href="#" class="pagination__link ${i === currentPageNum ? 'pagination__link--active' : ''}" data-page="${i}">${i}</a>`;
                 }
 
-                if (currentPageNum < totalPages - 2) {
+                if (pageEnd < totalPages - 1) {
                      paginationHTML += `<span class="pagination__ellipsis">...</span>`;
-                     endEllipsis = true;
                 }
-                
-                // Last Page
+
                 paginationHTML += `<a href="#" class="pagination__link ${totalPages === currentPageNum ? 'pagination__link--active' : ''}" data-page="${totalPages}">${totalPages}</a>`;
-                
-                // Next Button
-                // paginationHTML += `<a href="#" class="pagination__link" data-page="${Math.min(totalPages, currentPageNum + 1)}">&gt;</a>`;
             }
 
             paginationControls.innerHTML = paginationHTML;
@@ -213,12 +209,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (page !== currentPageNum) {
                         currentPageNum = page;
                         renderCatalog();
-                        window.scrollTo(0, catalogGrid.offsetTop - 100); // Scroll to top of grid
+                        const catalogLayoutTop = document.querySelector('.catalog-layout')?.offsetTop || 0;
+                        window.scrollTo({ top: catalogLayoutTop - 80, behavior: 'smooth' });
                     }
                 });
             });
         }
-
 
         if (sortBySelect) {
             sortBySelect.addEventListener('change', (e) => {
@@ -227,24 +223,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderCatalog();
             });
         }
-        // Desktop/Tablet filter button
-        if (applyFiltersButton && window.innerWidth > 767) { 
+
+        if (applyFiltersButton && window.innerWidth > 767) {
             applyFiltersButton.addEventListener('click', updateFiltersAndRender);
+        } else if (applyFiltersButton && window.innerWidth <= 767) { // For mobile, this button is inside the toggled sidebar
+             applyFiltersButton.addEventListener('click', updateFiltersAndRender);
         }
 
-        // Mobile filter button to toggle sidebar visibility & then apply filters
+
         if (mobileFilterButton && catalogSidebar) {
             mobileFilterButton.addEventListener('click', () => {
                 catalogSidebar.classList.toggle('catalog-sidebar--active');
-                 // If sidebar becomes active, we might want its internal button to apply filters
-                const mobileApplyBtn = catalogSidebar.querySelector('.catalog-sidebar__filter-button');
-                if(mobileApplyBtn && !mobileApplyBtn.dataset.listenerAttached){
-                    mobileApplyBtn.addEventListener('click', updateFiltersAndRender);
-                    mobileApplyBtn.dataset.listenerAttached = "true"; // Prevent multiple listeners
-                }
             });
         }
-        // Initial data fetch
         fetchData();
     }
 
@@ -261,14 +252,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             try {
                  const [booksRes, authorsRes] = await Promise.all([
-                    fetch('../data/books.json'),
-                    fetch('../data/authors.json')
+                    fetch(`${GITHUB_DATA_BASE_URL}books.json`),
+                    fetch(`${GITHUB_DATA_BASE_URL}authors.json`)
                 ]);
                 if (!booksRes.ok || !authorsRes.ok) throw new Error('Network error fetching details.');
 
                 const books = await booksRes.json();
                 const authors = await authorsRes.json();
-                
+
                 const book = books.find(b => b.id === bookId);
                 if (!book) {
                     contentArea.innerHTML = "<p>Nie znaleziono książki o podanym ID.</p>";
@@ -278,8 +269,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 document.getElementById('book-title').textContent = book.title;
                 document.getElementById('book-author').textContent = author ? author.name : 'Nieznany autor';
-                document.getElementById('book-image').src = book.imageUrl || 'https://placehold.co/395x376/E3E3E3/474545?text=Brak+Obrazka';
-                document.getElementById('book-image').alt = `Okładka: ${book.title}`;
+                const bookImageElement = document.getElementById('book-image');
+                if (bookImageElement) {
+                    bookImageElement.src = book.imageUrl || 'https://placehold.co/395x376/E3E3E3/474545?text=Brak+Obrazka';
+                    bookImageElement.alt = `Okładka: ${book.title}`;
+                }
                 document.getElementById('book-release-date').textContent = book.releaseDate || 'Brak danych';
                 document.getElementById('book-language').textContent = book.language || 'Brak danych';
                 document.getElementById('book-pages').textContent = book.pages ? `${book.pages} stron` : 'Brak danych';
@@ -311,9 +305,9 @@ document.addEventListener('DOMContentLoaded', function() {
         async function fetchColumnsData() {
             try {
                 const [quotesRes, booksRes, categoriesRes] = await Promise.all([
-                    fetch('../data/quotes.json'),
-                    fetch('../data/books.json'), 
-                    fetch('../data/categories.json')
+                    fetch(`${GITHUB_DATA_BASE_URL}quotes.json`),
+                    fetch(`${GITHUB_DATA_BASE_URL}books.json`),
+                    fetch(`${GITHUB_DATA_BASE_URL}categories.json`)
                 ]);
                 if (!quotesRes.ok || !booksRes.ok || !categoriesRes.ok) throw new Error('Network error fetching columns data.');
 
@@ -350,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (contactForm && formStatusMessage) {
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 const name = document.getElementById('name').value.trim();
                 const surname = document.getElementById('surname').value.trim();
                 const email = document.getElementById('email').value.trim();
@@ -367,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     formStatusMessage.style.color = "red";
                     return;
                 }
-                
+
                 console.log("Formularz wysłany (symulacja):", { name, surname, email, message });
                 formStatusMessage.textContent = "Wiadomość wysłana pomyślnie!";
                 formStatusMessage.style.color = "green";
@@ -379,5 +373,5 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    console.log(`Strona: ${currentPage}. Skrypty załadowane.`);
+    console.log(`Strona: ${currentPage}. Skrypty załadowane. Używana baza URL danych: ${GITHUB_DATA_BASE_URL}`);
 });

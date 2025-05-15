@@ -1,67 +1,407 @@
 [
   {
-    "id": 1,
-    "title": "Władca Pierścieni: Drużyna Pierścienia",
-    "authorId": 1,
-    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Władca+Pierścieni+1",
-    "rating": 9,
-    "description": "Pierwsza część epickiej trylogii fantasy J.R.R. Tolkiena. Frodo Baggins dziedziczy magiczny Pierścień, który musi zostać zniszczony, zanim wpadnie w ręce Mrocznego Władcy Saurona.",
-    "releaseDate": "1954-07-29",
-    "language": "Polski (tłum.)",
-    "pages": 423,
-    "genres": ["Fantasy", "Przygoda", "Klasyka"],
-    "tags": ["elfy", "krasnoludy", "magia", "śródziemie"]
+    "id": "book001",
+    "title": "Cień Przeszłości",
+    "authorId": "author001",
+    "publicationYear": 2019,
+    "isbn": "978-83-7480-700-1",
+    "description": "Detektyw musi zmierzyć się z zagadką sprzed lat, która rzuca nowe światło na jego własne życie.",
+    "categoryIds": ["cat003", "cat007"]
   },
   {
-    "id": 2,
-    "title": "Harry Potter i Kamień Filozoficzny",
-    "authorId": 2,
-    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Harry+Potter+1",
-    "rating": 8,
-    "description": "Opowieść o młodym czarodzieju, Harrym Potterze, który dowiaduje się o swoim magicznym pochodzeniu i rozpoczyna naukę w Szkole Magii i Czarodziejstwa w Hogwarcie.",
-    "releaseDate": "1997-06-26",
-    "language": "Polski (tłum.)",
-    "pages": 309,
-    "genres": ["Fantasy", "Młodzieżowa", "Przygoda"],
-    "tags": ["magia", "czarodzieje", "szkoła"]
+    "id": "book002",
+    "title": "Mury Grodu",
+    "authorId": "author002",
+    "publicationYear": 2015,
+    "isbn": "978-83-7480-701-8",
+    "description": "Epicka opowieść o obronie słowiańskiego grodu przed najazdem wrogich plemion.",
+    "categoryIds": ["cat004"]
   },
   {
-    "id": 3,
-    "title": "Solaris",
-    "authorId": 3,
-    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Solaris",
-    "rating": 10,
-    "description": "Powieść science fiction Stanisława Lema. Psycholog Kris Kelvin przybywa na stację badawczą unoszącą się nad cytoplazmatycznym oceanem pokrywającym planetę Solaris.",
-    "releaseDate": "1961-01-01",
-    "language": "Polski",
-    "pages": 204,
-    "genres": ["Science Fiction", "Filozoficzna", "Klasyka"],
-    "tags": ["kosmos", "obcy", "psychologia"]
+    "id": "book003",
+    "title": "Ostatni Smok",
+    "authorId": "author003",
+    "publicationYear": 2021,
+    "isbn": "978-83-7480-702-5",
+    "description": "Młoda czarodziejka wyrusza na poszukiwanie ostatniego smoka, by ocalić swoje królestwo.",
+    "categoryIds": ["cat001"]
   },
   {
-    "id": 4,
-    "title": "Opowieści z Narnii: Lew, czarownica i stara szafa",
-    "authorId": 1,
-    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Narnia+1",
-    "rating": 7,
-    "description": "Czwórka rodzeństwa Pevensie odkrywa magiczną krainę Narnię, ukrytą w starej szafie. Razem z lwem Aslanem walczą przeciwko Białej Czarownicy.",
-    "releaseDate": "1950-10-16",
-    "language": "Polski (tłum.)",
-    "pages": 208,
-    "genres": ["Fantasy", "Dziecięca", "Przygoda"],
-    "tags": ["magia", "zwierzęta", "baśń"]
+    "id": "book004",
+    "title": "Projekt Chimera",
+    "authorId": "author004",
+    "publicationYear": 2018,
+    "isbn": "978-83-7480-703-2",
+    "description": "W świecie przyszłości korporacja tworzy hybrydy ludzi i maszyn, co prowadzi do nieoczekiwanych konsekwencji.",
+    "categoryIds": ["cat002"]
   },
   {
-    "id": 5,
-    "title": "Diuna",
-    "authorId": 4,
-    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Diuna",
-    "rating": 9,
-    "description": "Monumentalna powieść science fiction Franka Herberta. Historia Paula Atrydy i jego rodziny, którzy przejmują kontrolę nad pustynną planetą Arrakis, jedynym źródłem cennego melanżu.",
-    "releaseDate": "1965-08-01",
-    "language": "Polski (tłum.)",
-    "pages": 604,
-    "genres": ["Science Fiction", "Przygoda", "Polityka"],
-    "tags": ["pustynia", "przyprawa", "intrygi"]
+    "id": "book005",
+    "title": "Serce w Chmurach",
+    "authorId": "author005",
+    "publicationYear": 2022,
+    "isbn": "978-83-7480-704-9",
+    "description": "Dwoje ludzi z różnych światów spotyka się przypadkiem i odkrywa, że łączy ich więcej, niż przypuszczali.",
+    "categoryIds": ["cat005"]
+  },
+  {
+    "id": "book006",
+    "title": "Ukryta Prawda",
+    "authorId": "author001",
+    "publicationYear": 2021,
+    "isbn": "978-83-7480-705-6",
+    "description": "Nowa sprawa prowadzi detektywa w głąb mrocznego świata korupcji i tajemnic.",
+    "categoryIds": ["cat003"]
+  },
+  {
+    "id": "book007",
+    "title": "Korona Popiołów",
+    "authorId": "author002",
+    "publicationYear": 2017,
+    "isbn": "978-83-7480-706-3",
+    "description": "Walka o władzę w królestwie po śmierci starego króla.",
+    "categoryIds": ["cat004"]
+  },
+  {
+    "id": "book008",
+    "title": "Szept Gwiazd",
+    "authorId": "author003",
+    "publicationYear": 2023,
+    "isbn": "978-83-7480-707-0",
+    "description": "Starożytna magia budzi się na nowo, a bohaterowie muszą stawić czoła przeznaczeniu.",
+    "categoryIds": ["cat001"]
+  },
+  {
+    "id": "book009",
+    "title": "Granice Percepcji",
+    "authorId": "author004",
+    "publicationYear": 2020,
+    "isbn": "978-83-7480-708-7",
+    "description": "Odkrycie nowej technologii pozwala ludziom przekraczać granice znanego wszechświata.",
+    "categoryIds": ["cat002"]
+  },
+  {
+    "id": "book010",
+    "title": "Miłość nad Rozlewiskiem",
+    "authorId": "author005",
+    "publicationYear": 2024,
+    "isbn": "978-83-7480-709-4",
+    "description": "Urokliwa historia miłosna rozgrywająca się na tle malowniczej polskiej wsi.",
+    "categoryIds": ["cat005"]
+  },
+  {
+    "id": "book011",
+    "title": "Głosy z Ciemności",
+    "authorId": "author006",
+    "publicationYear": 2019,
+    "isbn": "978-83-7480-710-0",
+    "description": "Zbiór reportaży o ludziach żyjących na marginesie społeczeństwa.",
+    "categoryIds": ["cat006"]
+  },
+  {
+    "id": "book012",
+    "title": "Słowa Nienapisane",
+    "authorId": "author007",
+    "publicationYear": 2020,
+    "isbn": "978-83-7480-711-7",
+    "description": "Tomik poezji eksplorujący tematy samotności, miłości i przemijania.",
+    "categoryIds": ["cat008"]
+  },
+  {
+    "id": "book013",
+    "title": "Labirynt Umysłu",
+    "authorId": "author008",
+    "publicationYear": 2022,
+    "isbn": "978-83-7480-712-4",
+    "description": "Psychiatra zostaje wciągnięty w niebezpieczną grę przez swojego pacjenta.",
+    "categoryIds": ["cat007"]
+  },
+  {
+    "id": "book014",
+    "title": "Przebudzenie Mocy",
+    "authorId": "author009",
+    "publicationYear": 2018,
+    "isbn": "978-83-7480-713-1",
+    "description": "Pierwsza część sagi o młodej dziedziczce magicznych mocy.",
+    "categoryIds": ["cat001"]
+  },
+  {
+    "id": "book015",
+    "title": "Warszawski Syndrom",
+    "authorId": "author010",
+    "publicationYear": 2021,
+    "isbn": "978-83-7480-714-8",
+    "description": "Były policjant musi rozwiązać sprawę seryjnych morderstw w stolicy.",
+    "categoryIds": ["cat003"]
+  },
+  {
+    "id": "book016",
+    "title": "Pod Skrzydłami Anioła",
+    "authorId": "author011",
+    "publicationYear": 2019,
+    "isbn": "978-83-7480-715-5",
+    "description": "Opowieść o sile przyjaźni i miłości w małej społeczności.",
+    "categoryIds": ["cat005", "cat006"]
+  },
+  {
+    "id": "book017",
+    "title": "Szlak Nadziei",
+    "authorId": "author012",
+    "publicationYear": 2016,
+    "isbn": "978-83-7480-716-2",
+    "description": "Losy polskiego żołnierza walczącego u boku aliantów.",
+    "categoryIds": ["cat004"]
+  },
+  {
+    "id": "book018",
+    "title": "Kosmiczne Echo",
+    "authorId": "author013",
+    "publicationYear": 2023,
+    "isbn": "978-83-7480-717-9",
+    "description": "Załoga statku kosmicznego odbiera tajemniczy sygnał z niezbadanej części galaktyki.",
+    "categoryIds": ["cat002"]
+  },
+  {
+    "id": "book019",
+    "title": "System",
+    "authorId": "author014",
+    "publicationYear": 2020,
+    "isbn": "978-83-7480-718-6",
+    "description": "Dogłębna analiza mechanizmów władzy i korupcji.",
+    "categoryIds": ["cat006"]
+  },
+  {
+    "id": "book020",
+    "title": "Tajemnica Starego Dworu",
+    "authorId": "author015",
+    "publicationYear": 2017,
+    "isbn": "978-83-7480-719-3",
+    "description": "Grupa przyjaciół odkrywa sekret ukryty w opuszczonym dworze.",
+    "categoryIds": ["cat001"]
+  },
+  {
+    "id": "book021",
+    "title": "Rozważania o Bycie",
+    "authorId": "author016",
+    "publicationYear": 2015,
+    "isbn": "978-83-7480-720-9",
+    "description": "Zbiór esejów na temat fundamentalnych pytań filozoficznych.",
+    "categoryIds": ["cat006", "cat008"]
+  },
+  {
+    "id": "book022",
+    "title": "Paragraf Zbrodni",
+    "authorId": "author017",
+    "publicationYear": 2022,
+    "isbn": "978-83-7480-721-6",
+    "description": "Młoda prawniczka staje w obronie niesłusznie oskarżonego człowieka.",
+    "categoryIds": ["cat003", "cat007"]
+  },
+  {
+    "id": "book023",
+    "title": "Misja Ostateczna",
+    "authorId": "author018",
+    "publicationYear": 2018,
+    "isbn": "978-83-7480-722-3",
+    "description": "Doświadczony komandos wyrusza na ostatnią, najniebezpieczniejszą misję.",
+    "categoryIds": ["cat003"]
+  },
+  {
+    "id": "book024",
+    "title": "Dotyk Nieśmiertelnego",
+    "authorId": "author019",
+    "publicationYear": 2023,
+    "isbn": "978-83-7480-723-0",
+    "description": "Romans między śmiertelniczką a tajemniczym nieśmiertelnym bytem.",
+    "categoryIds": ["cat001", "cat005"]
+  },
+  {
+    "id": "book025",
+    "title": "Żelazna Korona",
+    "authorId": "author020",
+    "publicationYear": 2020,
+    "isbn": "978-83-7480-724-7",
+    "description": "W alternatywnej Polsce Jagiellonowie muszą stawić czoła nowemu zagrożeniu z kosmosu.",
+    "categoryIds": ["cat002", "cat004"]
+  },
+  {
+    "id": "book026",
+    "title": "Bezdroża Sprawiedliwości",
+    "authorId": "author001",
+    "publicationYear": 2024,
+    "isbn": "978-83-7480-725-4",
+    "description": "Detektyw wraca, by rozwiązać sprawę, która może zniszczyć jego karierę.",
+    "categoryIds": ["cat003"]
+  },
+  {
+    "id": "book027",
+    "title": "Pieśń Zapomnianych Bogów",
+    "authorId": "author003",
+    "publicationYear": 2025,
+    "isbn": "978-83-7480-726-1",
+    "description": "Starożytne bóstwa powracają, by odzyskać władzę nad światem ludzi.",
+    "categoryIds": ["cat001"]
+  },
+  {
+    "id": "book028",
+    "title": "Cyberbunt",
+    "authorId": "author004",
+    "publicationYear": 2023,
+    "isbn": "978-83-7480-727-8",
+    "description": "Grupa hakerów wypowiada wojnę wszechwładnej korporacji kontrolującej globalną sieć.",
+    "categoryIds": ["cat002"]
+  },
+  {
+    "id": "book029",
+    "title": "Schronienie Serc",
+    "authorId": "author005",
+    "publicationYear": 2025,
+    "isbn": "978-83-7480-728-5",
+    "description": "Historia o odnajdywaniu miłości i nadziei w nieoczekiwanych miejscach.",
+    "categoryIds": ["cat005"]
+  },
+  {
+    "id": "book030",
+    "title": "Na Krawędzi Ciszy",
+    "authorId": "author008",
+    "publicationYear": 2024,
+    "isbn": "978-83-7480-729-2",
+    "description": "Kobieta odkrywa, że jej nowy dom skrywa mroczną tajemnicę.",
+    "categoryIds": ["cat007"]
+  },
+  {
+    "id": "book031",
+    "title": "Dziedzictwo Cieni",
+    "authorId": "author009",
+    "publicationYear": 2020,
+    "isbn": "978-83-7480-730-8",
+    "description": "Kontynuacja przygód młodej dziedziczki mocy, która musi stawić czoła pradawnemu złu.",
+    "categoryIds": ["cat001"]
+  },
+  {
+    "id": "book032",
+    "title": "Gra Pozorów",
+    "authorId": "author010",
+    "publicationYear": 2023,
+    "isbn": "978-83-7480-731-5",
+    "description": "Skrupulatnie zaplanowana zbrodnia okazuje się być częścią większej intrygi.",
+    "categoryIds": ["cat003"]
+  },
+  {
+    "id": "book033",
+    "title": "Świt nad Jeziorem",
+    "authorId": "author011",
+    "publicationYear": 2021,
+    "isbn": "978-83-7480-732-2",
+    "description": "Wzruszająca opowieść o poszukiwaniu swojego miejsca na ziemi i sile rodziny.",
+    "categoryIds": ["cat005", "cat006"]
+  },
+  {
+    "id": "book034",
+    "title": "Ostatni Bastion",
+    "authorId": "author012",
+    "publicationYear": 2019,
+    "isbn": "978-83-7480-733-9",
+    "description": "Heroiczna obrona polskiej placówki w czasie zapomnianego konfliktu.",
+    "categoryIds": ["cat004"]
+  },
+  {
+    "id": "book035",
+    "title": "Zagubieni w Czasoprzestrzeni",
+    "authorId": "author013",
+    "publicationYear": 2025,
+    "isbn": "978-83-7480-734-6",
+    "description": "Eksperyment naukowy wymyka się spod kontroli, przenosząc grupę badaczy do innego wymiaru.",
+    "categoryIds": ["cat002"]
+  },
+  {
+    "id": "book036",
+    "title": "Ludzie z Głębi",
+    "authorId": "author014",
+    "publicationYear": 2022,
+    "isbn": "978-83-7480-735-3",
+    "description": "Reportaż o życiu społeczności górniczej w obliczu transformacji.",
+    "categoryIds": ["cat006"]
+  },
+  {
+    "id": "book037",
+    "title": "Zaczarowany Las",
+    "authorId": "author015",
+    "publicationYear": 2020,
+    "isbn": "978-83-7480-736-0",
+    "description": "Opowieść o przygodach rodzeństwa w magicznym lesie pełnym niezwykłych stworzeń.",
+    "categoryIds": ["cat001"]
+  },
+  {
+    "id": "book038",
+    "title": "Dialogi z Nieskończonością",
+    "authorId": "author016",
+    "publicationYear": 2018,
+    "isbn": "978-83-7480-737-7",
+    "description": "Zbiór poetyckich medytacji nad naturą istnienia i wszechświata.",
+    "categoryIds": ["cat008"]
+  },
+  {
+    "id": "book039",
+    "title": "Świadek Koronny",
+    "authorId": "author017",
+    "publicationYear": 2024,
+    "isbn": "978-83-7480-738-4",
+    "description": "Prokurator musi chronić kluczowego świadka w procesie przeciwko mafii, jednocześnie zmagając się z własną przeszłością.",
+    "categoryIds": ["cat003", "cat007"]
+  },
+  {
+    "id": "book040",
+    "title": " Kryptonim 'Orzeł'",
+    "authorId": "author018",
+    "publicationYear": 2021,
+    "isbn": "978-83-7480-739-1",
+    "description": "Weteran służb specjalnych zostaje wciągnięty w międzynarodową aferę szpiegowską.",
+    "categoryIds": ["cat003"]
+  },
+  {
+    "id": "book041",
+    "title": "Pocałunek Wampira",
+    "authorId": "author019",
+    "publicationYear": 2024,
+    "isbn": "978-83-7480-740-7",
+    "description": "Zakazana miłość między studentką a charyzmatycznym wampirem w scenerii współczesnego miasta.",
+    "categoryIds": ["cat001", "cat005"]
+  },
+  {
+    "id": "book042",
+    "title": "Republika Maszyn",
+    "authorId": "author020",
+    "publicationYear": 2022,
+    "isbn": "978-83-7480-741-4",
+    "description": "W świecie, gdzie maszyny uzyskały świadomość, ludzie walczą o przetrwanie i wolność.",
+    "categoryIds": ["cat002", "cat004"]
+  },
+  {
+    "id": "book043",
+    "title": "Splątane Ścieżki",
+    "authorId": "author006",
+    "publicationYear": 2023,
+    "isbn": "978-83-7480-742-1",
+    "description": "Historia kilku osób, których losy niespodziewanie splatają się w obliczu kryzysu.",
+    "categoryIds": ["cat006"]
+  },
+  {
+    "id": "book044",
+    "title": "Echo Dawnych Snów",
+    "authorId": "author007",
+    "publicationYear": 2022,
+    "isbn": "978-83-7480-743-8",
+    "description": "Refleksyjna poezja o pamięci, marzeniach i poszukiwaniu sensu.",
+    "categoryIds": ["cat008"]
+  },
+  {
+    "id": "book045",
+    "title": "Syndykat Cieni",
+    "authorId": "author001",
+    "publicationYear": 2026,
+    "isbn": "978-83-7480-744-5",
+    "description": "Detektyw infiltruje międzynarodową organizację przestępczą, ryzykując wszystko.",
+    "categoryIds": ["cat003", "cat007"]
   }
 ]
