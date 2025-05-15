@@ -1,0 +1,1128 @@
+/* css/style.css */
+/* Reset and Base Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --background-page: #EFEFEF;
+    --background-container: white;
+    --background-header-nav: rgba(0, 0, 0, 0.20); /* --Overlays-Default */
+    --background-footer: #5A5A5A; /* --Background-Neutral-Default */
+    --background-button-primary: #2C2C2C; /* --Background-Brand-Default */
+    --background-button-primary-hover: #474545;
+    --background-card: white;
+    --background-input: white;
+    --background-column-header: rgba(145, 145, 145, 0.05);
+
+    --text-color-primary: #1E1E1E; /* --Text-Default-Default */
+    --text-color-secondary: #757575;
+    --text-color-tertiary: #B3B3B3; /* --Text-Default-Tertiary */
+    --text-color-on-brand: #F5F5F5; /* --Text-Brand-On-Brand */
+    --text-color-brand: #2C2C2C; /* --Text-Brand-Default */
+    --text-color-footer: #1E1E1E; /* Figma shows dark text on grey footer */
+
+    --border-color-default: #D9D9D9; /* --Border-Default-Default */
+    --border-color-strong: #474545;
+    --border-color-container-outline: #474545;
+    --border-color-nav-item: rgba(0, 0, 0, 0.30); /* --Miscellaneous-Bar-border */
+
+    --font-family-default: 'Inter', sans-serif;
+
+    --container-width-desktop: 1628px; /* Max width of main content area */
+    --container-padding: 15px; /* Mobile padding */
+
+    --border-radius-container: 20px;
+    --border-radius-button: 8px;
+    --border-radius-card: 8px;
+    --border-radius-input: 8px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family-default);
+    background-color: var(--background-page);
+    color: var(--text-color-primary);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+input, button, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.container {
+    max-width: var(--container-width-desktop);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+
+/* Header & Navigation */
+.header {
+    background-color: var(--background-header-nav);
+    border-bottom: 1px solid var(--border-color-strong);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between; /* Will adjust for mobile vs desktop */
+    align-items: center;
+    height: 95px;
+    padding-left: 20px; /* Default padding */
+    padding-right: 20px;
+    max-width: 1920px; /* Full width for nav bar */
+}
+
+.nav__logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-color-primary);
+    /* In Figma, logo is not part of the 4 nav items directly, but for simplicity for now */
+}
+
+.nav__list {
+    display: flex;
+    gap: 0; /* Nav items are edge to edge in Figma */
+}
+
+.nav__item {
+    flex: 1 1 0; /* Make items share space equally */
+    text-align: center;
+    border-left: 1px solid var(--border-color-nav-item);
+}
+.nav__item:last-child {
+    border-right: 1px solid var(--border-color-nav-item);
+}
+
+
+.nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 8px 8px; /* padding-top, padding-bottom, padding-left/right */
+    color: var(--text-color-primary);
+    font-size: 14px;
+    font-weight: 600;
+    height: 100%;
+    min-width: 100px; /* Ensure some minimum width */
+    transition: background-color 0.3s;
+}
+
+.nav__link::before { /* For icons */
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-bottom: 8px;
+    background-color: var(--text-color-primary); /* Placeholder for icon color */
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* Icons for nav links (using mask for potential SVG later) */
+.nav__link[href="home.html"]::before {
+    /* Placeholder for home icon (Figma shows a house outline) */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");
+}
+.nav__link[href="catalog.html"]::before {
+    /* Placeholder for catalog icon (Figma shows a list/menu icon) */
+     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/%3E%3C/svg%3E");
+}
+.nav__link[href="columns.html"]::before {
+     /* Placeholder for Różne icon (Figma shows a grid/blocks icon) */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M4 11h6V5H4v6zm0 7h6v-6H4v6zm8-13v6h6V5h-6zm0 13h6v-6h-6v6z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M4 11h6V5H4v6zm0 7h6v-6H4v6zm8-13v6h6V5h-6zm0 13h6v-6h-6v6z'/%3E%3C/svg%3E");
+}
+.nav__link[href="contact.html"]::before {
+    /* Placeholder for contact icon (Figma shows a user/person icon) */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E1E1E'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+}
+
+
+.nav__link--active,
+.nav__link:hover {
+    background-color: #6E6E6E; /* Active/hover state from Figma */
+    color: var(--text-color-brand); /* Active text color */
+}
+.nav__link--active::before,
+.nav__link:hover::before {
+    background-color: var(--text-color-brand); /* Active icon color */
+}
+
+
+.nav__mobile-toggle {
+    display: none; /* Hidden on desktop */
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+.nav__mobile-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color-primary);
+    border-radius: 3px;
+}
+
+/* Main Content Area */
+.main {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.main > section, .main > div { /* Direct children of main, like content containers */
+    background-color: var(--background-container);
+    border-radius: var(--border-radius-container);
+    outline: 1px solid var(--border-color-container-outline);
+    padding: 30px; /* General padding for content containers */
+    margin-bottom: 30px;
+}
+.main > section:last-child, .main > div:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Home Page Specific */
+.home-hero {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    padding: 40px; /* Custom padding for hero section */
+}
+
+.home-hero__logo-placeholder {
+    font-size: 100px; /* Large LOGO text */
+    font-weight: 700;
+    color: var(--text-color-primary);
+    /* Placeholder for actual logo image or styled text */
+    width: 50%; /* Adjust as needed */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px; /* Example height */
+    background-color: var(--background-page); /* Light grey background for the logo area itself */
+    border-radius: var(--border-radius-card);
+}
+
+.home-hero__description-wrapper {
+    width: 50%; /* Adjust as needed */
+    padding: 20px;
+    background-color: rgba(145, 145, 145, 0.05); /* Light background for text box */
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: var(--border-radius-card);
+}
+
+.home-hero__description-text {
+    font-size: 24px; /* As per figma observation */
+    line-height: 1.5;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--background-footer);
+    color: var(--text-color-footer);
+    padding: 30px 0;
+    border-top: 1px solid var(--border-color-default);
+}
+
+.footer__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap; /* For responsiveness */
+    max-width: 1920px; /* Full width for footer */
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.footer__social,
+.footer__navigation,
+.footer__info {
+    flex: 1;
+    min-width: 200px; /* Ensure they don't get too squished */
+    margin-bottom: 20px; /* Spacing on wrap */
+}
+
+.footer__social {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start; /* Align items to top, as per Figma */
+    flex-basis: 262px; /* Fixed width for social icons container */
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.footer__social-link img {
+    width: 24px;
+    height: 24px;
+}
+
+.footer__section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px; /* Space between title and links/text */
+    padding-bottom: 16px; /* As per figma spacing */
+    /* Figma doesn't show a border under these titles in the footer */
+}
+
+.footer__list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer__item {
+    margin-bottom: 12px; /* Space between footer links */
+}
+.footer__item:last-child {
+    margin-bottom: 0;
+}
+
+.footer__link,
+.footer__text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.4; /* 22.40px / 16px */
+    color: var(--text-color-footer);
+}
+.footer__link:hover {
+    text-decoration: underline;
+}
+
+/* BUTTONS (Generic) */
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 400; /* Inter Regular */
+    line-height: 1; /* 16px / 16px */
+    text-align: center;
+    border-radius: var(--border-radius-button);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.button--primary {
+    background-color: var(--background-button-primary);
+    color: var(--text-color-on-brand);
+    border: 1px solid var(--background-button-primary);
+}
+.button--primary:hover {
+    background-color: var(--background-button-primary-hover);
+    border-color: var(--background-button-primary-hover);
+}
+
+.button--secondary { /* For PDF download perhaps */
+    background-color: transparent;
+    color: var(--text-color-primary);
+    border: 1px solid var(--border-color-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.button--secondary:hover {
+    background-color: var(--background-page); /* Light hover for secondary */
+    color: var(--text-color-brand);
+    border-color: var(--text-color-brand);
+}
+
+
+/* CATALOG PAGE */
+.catalog-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start; /* Sidebar and content align top */
+}
+
+.catalog-sidebar {
+    flex: 0 0 280px; /* Fixed width for sidebar on desktop */
+    background-color: var(--background-card); /* Sidebar has white background in Figma */
+    padding: 24px;
+    border-radius: var(--border-radius-container); /* Consistent with other containers */
+    border: 1px solid var(--border-color-container-outline);
+}
+
+.catalog-sidebar__section {
+    margin-bottom: 24px;
+}
+.catalog-sidebar__section:last-of-type {
+    margin-bottom: 0;
+}
+
+.catalog-sidebar__label {
+    display: block;
+    font-size: 16px; /* Assuming same as input text */
+    font-weight: 400;
+    color: var(--text-color-primary);
+    margin-bottom: 8px;
+}
+
+.catalog-sidebar__select,
+.catalog-sidebar__input { /* For potential future text inputs in sidebar */
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid var(--border-color-default);
+    border-radius: var(--border-radius-input);
+    background-color: var(--background-input);
+    color: var(--text-color-primary);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231E1E1E' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+
+.catalog-sidebar__title {
+    font-size: 16px; /* Roboto in Figma, but we use Inter globally for now */
+    font-weight: 400; /* Roboto regular in Figma */
+    color: var(--text-color-primary);
+    margin-bottom: 12px;
+    text-align: center; /* Figma shows centered titles for AUTORZY/TAGI */
+}
+
+.catalog-sidebar__list {
+    list-style: none;
+    padding: 0;
+    max-height: 160px; /* From Figma's list item container */
+    overflow-y: auto;
+    background-color: rgba(149, 147, 147, 0.06); /* Light grey list background */
+    border: 1px solid rgba(0, 0, 0, 0.13); /* Subtle border */
+    border-radius: 4px; /* Slight radius for list box */
+}
+.catalog-sidebar__list li {
+    padding: 10px 16px; /* Padding for list items from Figma */
+    font-size: 16px; /* Roboto in Figma */
+    color: #1D1B20; /* --Schemes-On-Surface */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.catalog-sidebar__list li label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+.catalog-sidebar__list input[type="checkbox"] {
+    /* Custom checkbox styling can be added if needed to match Figma exactly */
+    accent-color: #65558F; /* --Schemes-Primary */
+    width: 18px;
+    height: 18px;
+    margin-left: auto; /* Pushes checkbox to the right */
+}
+
+.catalog-sidebar__filter-button {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.catalog-main-content {
+    flex: 1;
+    background-color: var(--background-card);
+    padding: 24px;
+    border-radius: var(--border-radius-container);
+    border: 1px solid var(--border-color-container-outline);
+}
+
+.catalog-controls-mobile {
+    display: none; /* Hidden on desktop/tablet by default */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.catalog-controls-mobile .button {
+    flex: 1;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Responsive columns */
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.book-card {
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color-default);
+    border-radius: var(--border-radius-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align image and text content to the start */
+    padding: 8px 20px; /* Inner padding like Figma */
+    transition: box-shadow 0.3s;
+}
+.book-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.book-card__link {
+    text-decoration: none;
+    color: inherit;
+    display: flex; /* To align image and info if needed, or column */
+    flex-direction: column; /* Stack image and info */
+    width: 100%;
+    gap: 17px; /* Gap between image and text block from figma */
+}
+
+.book-card__image {
+    width: 124px; /* Fixed width from Figma */
+    height: 119px; /* Fixed height from Figma */
+    object-fit: cover;
+    background-color: var(--background-page); /* Placeholder bg */
+    /* No border-radius on the image itself in Figma */
+}
+
+.book-card__info {
+    padding-top: 0; /* Already has gap from flex parent */
+}
+
+.book-card__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color-primary);
+    margin-bottom: 8px;
+    line-height: 1.2; /* 28.8px / 24px */
+}
+
+.book-card__author,
+.book-card__rating {
+    font-size: 16px;
+    color: var(--text-color-primary); /* Figma shows black text for author/rating */
+    margin-bottom: 4px;
+    line-height: 1.4; /* 22.4px / 16px */
+}
+.book-card__rating {
+    margin-bottom: 0;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+}
+.pagination__link {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: var(--text-color-primary);
+    border-radius: var(--border-radius-button);
+    text-decoration: none;
+    min-width: 32px; /* For single digit numbers */
+    text-align: center;
+}
+.pagination__link:hover {
+    background-color: var(--background-page);
+}
+.pagination__link--active {
+    background-color: var(--background-button-primary);
+    color: var(--text-color-on-brand);
+}
+.pagination__ellipsis {
+    padding: 8px 16px; /* More padding for ... */
+    font-weight: 700;
+}
+
+/* DETAILS PAGE */
+.book-details-container {
+    /* Uses default .container and main > section styles */
+}
+.book-details__header {
+    display: flex;
+    gap: 30px; /* Gap between image and main info */
+    margin-bottom: 30px;
+    align-items: flex-start; /* Align image and info text block */
+}
+.book-details__image {
+    flex: 0 0 395px; /* Fixed width for desktop image */
+    max-width: 100%; /* Ensure responsiveness */
+    height: auto; /* Auto height based on image aspect ratio, or fixed if needed */
+    min-height: 376px; /* From Figma desktop */
+    object-fit: cover;
+    background-color: var(--background-page); /* Placeholder background */
+    border-radius: var(--border-radius-card); /* Slight radius for image container */
+}
+.book-details__main-info {
+    flex: 1;
+    position: relative; /* For absolute positioning of back button if needed */
+}
+.book-details__title {
+    font-size: 64px; /* Desktop title size */
+    font-weight: 400;
+    line-height: 1; /* 64px / 64px */
+    margin-bottom: 16px; /* Space between title and author */
+    color: var(--text-color-primary);
+}
+.book-details__author {
+    font-size: 32px; /* Desktop author size */
+    font-weight: 400;
+    line-height: 1; /* 32px / 32px */
+    margin-bottom: 30px;
+    color: var(--text-color-primary);
+}
+.book-details__back-button {
+    /* Positioned by flex order, or absolutely if design demands */
+    min-width: 280px; /* Figma desktop width */
+    /* position: absolute; top:0; right:0; if needed */
+}
+
+.book-details__body {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.book-details__specifics {
+    flex: 1;
+}
+.book-details__section-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: var(--text-color-primary);
+}
+.book-details__specifics-list {
+    list-style: none;
+    padding: 0;
+    font-size: 20px; /* Text size for details */
+    line-height: 1.5; /* Increased line height for readability */
+    color: var(--text-color-primary);
+}
+.book-details__specifics-list li {
+    margin-bottom: 8px;
+}
+.book-details__specifics-list strong {
+    font-weight: 600; /* Bolder labels */
+}
+
+.book-details__download-button {
+    min-width: 280px; /* Desktop width */
+    height: 82px; /* Desktop height */
+    background-color: rgba(145, 145, 145, 0.05); /* Light background */
+    border: 1px solid rgba(0, 0, 0, 0.29);
+    border-radius: var(--border-radius-button);
+    font-size: 20px;
+}
+.book-details__download-icon {
+    display: inline-block;
+    width: 32px; /* Adjust based on actual icon */
+    height: 40px; /* Adjust based on actual icon */
+    background-color: var(--text-color-primary); /* Placeholder icon */
+    /* Add SVG mask for actual icon later */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14a6 6 0 0 0 6 6h13a5 5 0 0 0 5-5c0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14a6 6 0 0 0 6 6h13a5 5 0 0 0 5-5c0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+}
+
+.book-details__description {
+    background-color: rgba(145, 145, 145, 0.05); /* Light background for description box */
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: var(--border-radius-card);
+    padding: 20px;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* COLUMNS PAGE (Różne) */
+.columns-page-container {
+    /* Uses default .container and main > section styles */
+}
+.columns-layout {
+    display: flex;
+    gap: 24px; /* Gap between columns */
+}
+.column-item {
+    flex: 1; /* Each column takes equal space initially */
+    /* background-color: transparent; No separate bg for column item itself */
+    border: 1px solid var(--border-color-strong); /* Border around each column block */
+    /* border-radius: 0; No border radius per individual column, but on the parent container */
+}
+.column-item__title {
+    background-color: var(--background-column-header); /* Light grey header */
+    padding: 20px;
+    text-align: center;
+    font-size: 36px; /* Desktop title */
+    font-weight: 700;
+    border-bottom: 1px solid var(--border-color-strong);
+    line-height: 1;
+}
+.column-item__list {
+    list-style: none;
+    padding: 20px; /* Padding for content inside column */
+    font-size: 24px; /* Desktop list item text */
+    line-height: 1.4; /* 33.6px / 24px */
+}
+.column-item__list li {
+    margin-bottom: 10px;
+}
+
+/* CONTACT PAGE */
+.contact-form-container {
+    /* Uses default .container and main > section styles */
+    max-width: 1131px; /* Max width of form container from Figma Desktop */
+}
+.contact-form {
+    max-width: 620px; /* Max width of inner form elements based on Figma */
+    margin: 0 auto; /* Center the form */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-label {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color-primary);
+}
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid var(--border-color-default);
+    border-radius: var(--border-radius-input);
+    background-color: var(--background-input);
+    color: var(--text-color-primary);
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--text-color-tertiary);
+}
+.form-textarea {
+    resize: vertical;
+    min-height: 120px; /* Default min height for textarea */
+}
+.form-submit-button {
+    align-self: center; /* Center submit button */
+    min-width: 272px; /* Width from Figma */
+}
+#form-status-message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+
+/* Tablet Styles */
+@media (max-width: 1023px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .nav {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .nav__logo {
+        font-size: 20px; /* Slightly smaller logo if needed */
+    }
+
+    .nav__list {
+        /* On tablet, nav items might need to be slightly smaller or wrap if too many */
+    }
+    .nav__link {
+        font-size: 12px; /* Smaller font for nav items if needed to fit */
+        min-width: 80px;
+    }
+    .nav__link::before {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 6px;
+    }
+
+
+    .home-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .home-hero__logo-placeholder,
+    .home-hero__description-wrapper {
+        width: 100%;
+        max-width: 600px; /* Limit width on tablet */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .home-hero__logo-placeholder {
+        height: 250px;
+        font-size: 80px;
+    }
+    .home-hero__description-text {
+        font-size: 20px;
+    }
+
+
+    .footer__container {
+        padding-left: 20px;
+        padding-right: 20px;
+        /* Footer items might stack more or have adjusted flex basis */
+    }
+    .footer__social {
+        justify-content: center; /* Center social icons if they stack */
+        margin-bottom: 30px;
+        flex-basis: 100%;
+    }
+    .footer__navigation, .footer__info {
+        text-align: center; /* Center text if they stack */
+        flex-basis: calc(50% - 15px); /* Two columns */
+    }
+
+    /* Catalog Tablet */
+    .catalog-layout {
+        flex-direction: column; /* Stack sidebar and content */
+    }
+    .catalog-sidebar {
+        width: 100%;
+        flex: 0 0 auto; /* Reset flex basis */
+        margin-bottom: 20px;
+        /* Sidebar could be a collapsible element on tablet if needed */
+    }
+    .catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller cards on tablet */
+    }
+    .book-card__title {
+        font-size: 20px;
+    }
+    .book-card__author, .book-card__rating {
+        font-size: 14px;
+    }
+
+    /* Details Tablet */
+    .book-details__header {
+        flex-direction: column; /* Stack image and info on tablet */
+        align-items: center; /* Center items when stacked */
+        text-align: center;
+    }
+    .book-details__image {
+        flex-basis: auto; /* Reset basis */
+        width: 80%; /* Make image smaller, centered */
+        max-width: 300px;
+        min-height: auto;
+        margin-bottom: 20px;
+    }
+    .book-details__main-info {
+        width: 100%;
+    }
+    .book-details__title {
+        font-size: 48px; /* Tablet title */
+    }
+    .book-details__author {
+        font-size: 28px; /* Tablet author */
+    }
+    .book-details__body {
+        flex-direction: column;
+        align-items: center;
+    }
+    .book-details__specifics {
+        width: 100%;
+        max-width: 450px;
+        margin-bottom: 20px;
+    }
+    .book-details__specifics-list, .book-details__description p {
+        font-size: 18px;
+    }
+    .book-details__download-button, .book-details__back-button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Columns (Różne) Tablet */
+    .columns-layout {
+        flex-wrap: wrap; /* Allow columns to wrap */
+    }
+    .column-item {
+        flex-basis: calc(50% - 12px); /* Two columns for tablet */
+        margin-bottom: 24px; /* Space when wrapped */
+    }
+    /* Ensure the last item takes full width if it's the third one (odd number) */
+    .column-item:nth-child(odd):last-child {
+      flex-basis: 100%;
+    }
+    .column-item__title {
+        font-size: 32px;
+    }
+    .column-item__list {
+        font-size: 20px;
+    }
+
+
+    /* Contact Tablet */
+    .contact-form-container {
+        padding: 20px;
+    }
+    .contact-form {
+        gap: 20px;
+    }
+
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .nav {
+        position: relative; /* For absolute positioning of mobile menu */
+        justify-content: space-between; /* Logo on left, toggle on right */
+    }
+    .nav__list {
+        display: none; /* Hide desktop nav list */
+        flex-direction: column;
+        position: absolute;
+        top: 95px; /* Below header */
+        left: 0;
+        width: 100%;
+        background-color: var(--background-header-nav);
+        border-top: 1px solid var(--border-color-strong);
+    }
+    .nav__list.nav__list--active {
+        display: flex; /* Show when active */
+    }
+    .nav__item {
+        width: 100%;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color-nav-item);
+    }
+    .nav__item:last-child {
+        border-bottom: none;
+    }
+    .nav__link {
+        padding: 15px;
+        justify-content: flex-start; /* Align text to left */
+        flex-direction: row; /* Icon and text side-by-side */
+        gap: 15px;
+    }
+    .nav__link::before {
+        margin-bottom: 0;
+    }
+
+    .nav__mobile-toggle {
+        display: flex; /* Show hamburger icon */
+    }
+
+
+    .home-hero__logo-placeholder {
+        font-size: 60px;
+        height: 200px;
+    }
+    .home-hero__description-text {
+        font-size: 18px;
+    }
+
+
+    .footer__container {
+       flex-direction: column;
+       align-items: center;
+       text-align: center;
+    }
+    .footer__social,
+    .footer__navigation,
+    .footer__info {
+        width: 100%;
+        max-width: 300px; /* Limit width of footer sections on mobile */
+        flex-basis: auto;
+    }
+    .footer__social {
+        justify-content: center;
+    }
+    .footer__section-title {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Catalog Mobile */
+    .catalog-sidebar {
+        display: none; /* Hidden by default, shown via JS modal/toggle */
+        /* Or always visible stacked above */
+    }
+    .catalog-sidebar.catalog-sidebar--active { /* JS will toggle this for modal/dropdown effect */
+        display: block; 
+        width: 100%;
+        margin-bottom: 20px;
+        position: absolute; /* Example for modal-like behavior */
+        left: 0;
+        top: 95px; /* Below header */
+        z-index: 900;
+        background-color: white; /* Ensure it's on top */
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .catalog-main-content {
+        padding: 15px;
+    }
+    .catalog-controls-mobile {
+        display: flex; /* Show mobile filter/sort buttons */
+    }
+    .catalog-grid {
+        /* Cards will stack by default if minmax allows for only one */
+        grid-template-columns: 1fr; /* Single column for cards */
+        gap: 15px;
+    }
+    .book-card {
+        flex-direction: row; /* Image on left, text on right for mobile list view */
+        align-items: center;
+        padding: 12px;
+    }
+    .book-card__link {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+    .book-card__image {
+        width: 82px; /* Mobile image size from Figma */
+        height: 68px; /* Mobile image size */
+        flex-shrink: 0; /* Prevent image from shrinking */
+    }
+    .book-card__info {
+        flex: 1;
+    }
+    .book-card__title {
+        font-size: 18px; /* Adjusted for mobile */
+    }
+    .book-card__author, .book-card__rating {
+        font-size: 14px;
+    }
+
+    /* Details Mobile */
+    .book-details-container {
+      padding: 15px;
+    }
+    .book-details__header {
+        /* Already column from tablet */
+    }
+    .book-details__image {
+        width: 80%; /* More constrained on mobile */
+        max-width: 205px; /* From figma mobile */
+        min-height: 150px; /* From figma mobile */
+    }
+    .book-details__title {
+        font-size: 24px; /* Mobile title */
+    }
+    .book-details__author {
+        font-size: 15px; /* Mobile author */
+        margin-bottom: 20px;
+    }
+     .book-details__specifics-list, .book-details__description p {
+        font-size: 14px; /* Mobile text */
+    }
+    .book-details__section-title {
+        font-size: 16px; /* Mobile section title */
+    }
+    .book-details__download-button, .book-details__back-button {
+        font-size: 14px;
+        padding: 10px 15px;
+        height: auto;
+        min-height: 48px;
+        width: 100%; /* Full width buttons */
+        max-width: 284px; /* From Figma mobile detail buttons */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .book-details__download-icon {
+        width: 24px; /* Adjust for mobile */
+        height: 30px; /* Adjust for mobile */
+    }
+    .book-details__body {
+      align-items: center;
+    }
+    .book-details__specifics {
+      text-align: left; /* Ensure specifics are left aligned if parent is centered */
+      padding-left: 10px; /* Add some padding for list items */
+    }
+
+
+    /* Columns (Różne) Mobile */
+    .columns-page-container {
+      padding: 15px;
+    }
+    .columns-layout {
+        flex-direction: column; /* Stack columns */
+        gap: 20px;
+    }
+    .column-item {
+        flex-basis: auto; /* Reset basis */
+        margin-bottom: 0; /* Gap handles spacing */
+    }
+    .column-item__title {
+        font-size: 24px;
+        padding: 15px;
+    }
+    .column-item__list {
+        font-size: 14px; /* Mobile list item text */
+        padding: 15px;
+        line-height: 1.4; /* 19.6px / 14px */
+    }
+    .column-item__list li {
+        margin-bottom: 8px;
+    }
+
+
+    /* Contact Mobile */
+    .contact-form-container {
+        padding: 15px;
+    }
+    .form-input, .form-textarea, .form-label, .form-submit-button {
+        font-size: 14px;
+    }
+    .form-input, .form-textarea {
+        padding: 10px 12px;
+    }
+    .form-submit-button {
+        min-width: 100%;
+        padding: 12px;
+    }
+}

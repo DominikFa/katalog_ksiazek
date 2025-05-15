@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Fantastyka" },
+  { "id": 2, "name": "Science Fiction" },
+  { "id": 3, "name": "Kryminał" },
+  { "id": 4, "name": "Romans" },
+  { "id": 5, "name": "Literatura faktu" },
+  { "id": 6, "name": "Klasyka" },
+  { "id": 7, "name": "Młodzieżowa" },
+  { "id": 8, "name": "Dziecięca" }
+]

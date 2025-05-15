@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "title": "Władca Pierścieni: Drużyna Pierścienia",
+    "authorId": 1,
+    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Władca+Pierścieni+1",
+    "rating": 9,
+    "description": "Pierwsza część epickiej trylogii fantasy J.R.R. Tolkiena. Frodo Baggins dziedziczy magiczny Pierścień, który musi zostać zniszczony, zanim wpadnie w ręce Mrocznego Władcy Saurona.",
+    "releaseDate": "1954-07-29",
+    "language": "Polski (tłum.)",
+    "pages": 423,
+    "genres": ["Fantasy", "Przygoda", "Klasyka"],
+    "tags": ["elfy", "krasnoludy", "magia", "śródziemie"]
+  },
+  {
+    "id": 2,
+    "title": "Harry Potter i Kamień Filozoficzny",
+    "authorId": 2,
+    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Harry+Potter+1",
+    "rating": 8,
+    "description": "Opowieść o młodym czarodzieju, Harrym Potterze, który dowiaduje się o swoim magicznym pochodzeniu i rozpoczyna naukę w Szkole Magii i Czarodziejstwa w Hogwarcie.",
+    "releaseDate": "1997-06-26",
+    "language": "Polski (tłum.)",
+    "pages": 309,
+    "genres": ["Fantasy", "Młodzieżowa", "Przygoda"],
+    "tags": ["magia", "czarodzieje", "szkoła"]
+  },
+  {
+    "id": 3,
+    "title": "Solaris",
+    "authorId": 3,
+    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Solaris",
+    "rating": 10,
+    "description": "Powieść science fiction Stanisława Lema. Psycholog Kris Kelvin przybywa na stację badawczą unoszącą się nad cytoplazmatycznym oceanem pokrywającym planetę Solaris.",
+    "releaseDate": "1961-01-01",
+    "language": "Polski",
+    "pages": 204,
+    "genres": ["Science Fiction", "Filozoficzna", "Klasyka"],
+    "tags": ["kosmos", "obcy", "psychologia"]
+  },
+  {
+    "id": 4,
+    "title": "Opowieści z Narnii: Lew, czarownica i stara szafa",
+    "authorId": 1,
+    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Narnia+1",
+    "rating": 7,
+    "description": "Czwórka rodzeństwa Pevensie odkrywa magiczną krainę Narnię, ukrytą w starej szafie. Razem z lwem Aslanem walczą przeciwko Białej Czarownicy.",
+    "releaseDate": "1950-10-16",
+    "language": "Polski (tłum.)",
+    "pages": 208,
+    "genres": ["Fantasy", "Dziecięca", "Przygoda"],
+    "tags": ["magia", "zwierzęta", "baśń"]
+  },
+  {
+    "id": 5,
+    "title": "Diuna",
+    "authorId": 4,
+    "imageUrl": "https://placehold.co/200x300/E3E3E3/474545?text=Diuna",
+    "rating": 9,
+    "description": "Monumentalna powieść science fiction Franka Herberta. Historia Paula Atrydy i jego rodziny, którzy przejmują kontrolę nad pustynną planetą Arrakis, jedynym źródłem cennego melanżu.",
+    "releaseDate": "1965-08-01",
+    "language": "Polski (tłum.)",
+    "pages": 604,
+    "genres": ["Science Fiction", "Przygoda", "Polityka"],
+    "tags": ["pustynia", "przyprawa", "intrygi"]
+  }
+]
