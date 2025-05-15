@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/data/authors.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/authors.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/books.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/books.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/categories.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/scripts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

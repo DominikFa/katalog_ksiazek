@@ -1,142 +1,22 @@
 [
-  {
-    "id": "author001",
-    "name": "Ewa Krajewska",
-    "birthYear": 1978,
-    "nationality": "Polska",
-    "bio": "Autorka bestsellerowych kryminałów, znana z mrocznych i zaskakujących fabuł."
-  },
-  {
-    "id": "author002",
-    "name": "Piotr Zamojski",
-    "birthYear": 1965,
-    "nationality": "Polska",
-    "bio": "Historyk i pisarz, specjalizujący się w powieściach osadzonych w realiach średniowiecznej Polski."
-  },
-  {
-    "id": "author003",
-    "name": "Anna Czerwińska",
-    "birthYear": 1985,
-    "nationality": "Polska",
-    "bio": "Młoda autorka, która zdobyła uznanie dzięki swoim oryginalnym powieściom fantasy."
-  },
-  {
-    "id": "author004",
-    "name": "Marek Wiśniewski",
-    "birthYear": 1972,
-    "nationality": "Polska",
-    "bio": "Pisarz science fiction, eksplorujący tematykę sztucznej inteligencji i podróży kosmicznych."
-  },
-  {
-    "id": "author005",
-    "name": "Katarzyna Lewandowska",
-    "birthYear": 1990,
-    "nationality": "Polska",
-    "bio": "Autorka ciepłych i wzruszających romansów współczesnych."
-  },
-  {
-    "id": "author006",
-    "name": "Tomasz Szymański",
-    "birthYear": 1981,
-    "nationality": "Polska",
-    "bio": "Reportażysta i autor książek z gatunku literatury faktu, skupiający się na problemach społecznych."
-  },
-  {
-    "id": "author007",
-    "name": "Magdalena Kruk",
-    "birthYear": 1975,
-    "nationality": "Polska",
-    "bio": "Poetka, laureatka wielu nagród literackich za swoje subtelne i głębokie wiersze."
-  },
-  {
-    "id": "author008",
-    "name": "Grzegorz Nowak",
-    "birthYear": 1969,
-    "nationality": "Polska",
-    "bio": "Pisarz specjalizujący się w thrillerach psychologicznych z elementami nadprzyrodzonymi."
-  },
-  {
-    "id": "author009",
-    "name": "Alicja Wójcik",
-    "birthYear": 1988,
-    "nationality": "Polska",
-    "bio": "Twórczyni epickich sag fantasy dla młodzieży i dorosłych."
-  },
-  {
-    "id": "author010",
-    "name": "Robert Jankowski",
-    "birthYear": 1970,
-    "nationality": "Polska",
-    "bio": "Autor powieści sensacyjnych i kryminalnych, których akcja często rozgrywa się w Warszawie."
-  },
-  {
-    "id": "author011",
-    "name": "Izabela Kowalczyk",
-    "birthYear": 1983,
-    "nationality": "Polska",
-    "bio": "Pisała popularne powieści obyczajowe z wątkami romantycznymi, osadzone w małych miasteczkach."
-  },
-  {
-    "id": "author012",
-    "name": "Krzysztof Baran",
-    "birthYear": 1960,
-    "nationality": "Polska",
-    "bio": "Znany z powieści historycznych opisujących losy Polaków na frontach II wojny światowej."
-  },
-  {
-    "id": "author013",
-    "name": "Justyna Michalska",
-    "birthYear": 1992,
-    "nationality": "Polska",
-    "bio": "Autorka mrocznych opowiadań z pogranicza horroru i science fiction."
-  },
-  {
-    "id": "author014",
-    "name": "Paweł Zając",
-    "birthYear": 1977,
-    "nationality": "Polska",
-    "bio": "Dziennikarz śledczy, autor reportaży i książek non-fiction o współczesnej Polsce."
-  },
-  {
-    "id": "author015",
-    "name": "Natalia Mazur",
-    "birthYear": 1980,
-    "nationality": "Polska",
-    "bio": "Autorka powieści dla dzieci i młodzieży, pełnych przygód i magii."
-  },
-  {
-    "id": "author016",
-    "name": "Adam Stankiewicz",
-    "birthYear": 1967,
-    "nationality": "Polska",
-    "bio": "Profesor filozofii, autor esejów i poezji filozoficznej."
-  },
-  {
-    "id": "author017",
-    "name": "Monika Grabowska",
-    "birthYear": 1986,
-    "nationality": "Polska",
-    "bio": "Twórczyni thrillerów prawniczych, które łączą napięcie z wnikliwym obrazem systemu sprawiedliwości."
-  },
-  {
-    "id": "author018",
-    "name": "Stefan Dąbrowski",
-    "birthYear": 1955,
-    "nationality": "Polska",
-    "bio": "Emerytowany wojskowy, piszący powieści sensacyjne oparte na swoich doświadczeniach."
-  },
-  {
-    "id": "author019",
-    "name": "Julia Sokołowska",
-    "birthYear": 1995,
-    "nationality": "Polska",
-    "bio": "Młoda, obiecująca autorka romansów paranormalnych."
-  },
-  {
-    "id": "author020",
-    "name": "Wiktor Lis",
-    "birthYear": 1973,
-    "nationality": "Polska",
-    "bio": "Pisarz tworzący alternatywne historie Polski, łączący elementy science fiction i powieści historycznej."
-  }
+  { "id": 1, "name": "Ewa Krajewska" },
+  { "id": 2, "name": "Piotr Zamojski" },
+  { "id": 3, "name": "Anna Czerwińska" },
+  { "id": 4, "name": "Marek Wiśniewski" },
+  { "id": 5, "name": "Katarzyna Lewandowska" },
+  { "id": 6, "name": "Tomasz Szymański" },
+  { "id": 7, "name": "Magdalena Kruk" },
+  { "id": 8, "name": "Grzegorz Nowak" },
+  { "id": 9, "name": "Alicja Wójcik" },
+  { "id": 10, "name": "Robert Jankowski" },
+  { "id": 11, "name": "Izabela Kowalczyk" },
+  { "id": 12, "name": "Krzysztof Baran" },
+  { "id": 13, "name": "Justyna Michalska" },
+  { "id": 14, "name": "Paweł Zając" },
+  { "id": 15, "name": "Natalia Mazur" },
+  { "id": 16, "name": "Adam Stankiewicz" },
+  { "id": 17, "name": "Monika Grabowska" },
+  { "id": 18, "name": "Stefan Dąbrowski" },
+  { "id": 19, "name": "Julia Sokołowska" },
+  { "id": 20, "name": "Wiktor Lis" }
 ]
