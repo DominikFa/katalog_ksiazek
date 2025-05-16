@@ -10,27 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav container">
-            <a href="home.html" class="nav__logo">LOGO</a>
-            <ul class="nav__list">
-                <li class="nav__item"><a href="home.html" class="nav__link">Strona Główna</a></li>
-                <li class="nav__item"><a href="catalog.html" class="nav__link">Katalog</a></li>
-                <li class="nav__item"><a href="columns.html" class="nav__link">Różne</a></li>
-                <li class="nav__item"><a href="contact.html" class="nav__link">Kontakt</a></li>
-            </ul>
-            <div class="nav__mobile-toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+<header class="header">
+    <nav class="nav container">
+        <ul class="nav__list">
+            <li class="nav__item"><a href="home.html" class="nav__link">Strona Główna</a></li>
+            <li class="nav__item"><a href="catalog.html" class="nav__link">Katalog</a></li>
+            <li class="nav__item"><a href="columns.html" class="nav__link">Różne</a></li>
+            <li class="nav__item"><a href="contact.html" class="nav__link">Kontakt</a></li>
+        </ul>
+        <div class="nav__mobile-toggle" id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
 
-    <main class="main">
-        <div class="catalog-layout container">
-            <aside class="catalog-sidebar">
-                <div class="catalog-sidebar__section">
+<main class="main">
+    <div class="catalog-layout container">
+        <aside class="catalog-sidebar" id="catalog-sidebar">
+            <div class="catalog-sidebar__content-wrapper">
+                <button class="catalog-sidebar__close-button" id="close-filters-button">&times;</button>
+                <div class="catalog-sidebar__section catalog-sidebar__section--sort-desktop">
                     <label for="sort-by" class="catalog-sidebar__label">Sortuj:</label>
                     <select id="sort-by" name="sort-by" class="catalog-sidebar__select">
                         <option value="title-asc">Tytuł A-Z</option>
@@ -42,76 +43,78 @@
 
                 <div class="catalog-sidebar__section">
                     <h3 class="catalog-sidebar__title">AUTORZY</h3>
+                    <input type="text" id="search-author" class="catalog-sidebar__search-input" placeholder="Szukaj autora...">
                     <ul class="catalog-sidebar__list" id="authors-filter-list">
-                        <li><label><input type="checkbox" name="author" value="1"> Autor 1</label></li>
-                        <li><label><input type="checkbox" name="author" value="2"> Autor 2</label></li>
+
                     </ul>
                 </div>
 
                 <div class="catalog-sidebar__section">
                     <h3 class="catalog-sidebar__title">TAGI</h3>
+                    <input type="text" id="search-tag" class="catalog-sidebar__search-input" placeholder="Szukaj taga...">
                     <ul class="catalog-sidebar__list" id="tags-filter-list">
-                        <li><label><input type="checkbox" name="tag" value="fantastyka"> Fantastyka</label></li>
-                         <li><label><input type="checkbox" name="tag" value="przygoda"> Przygoda</label></li>
                     </ul>
                 </div>
                 <button class="button button--primary catalog-sidebar__filter-button" id="apply-filters-button">Filtruj</button>
-            </aside>
+            </div>
+        </aside>
 
-            <div class="catalog-main-content">
-                <div class="catalog-controls-mobile">
-                     <button class="button button--primary" id="mobile-filter-button">Filtruj</button>
-                     <button class="button button--primary" id="mobile-sort-button">Sortuj</button>
-                </div>
-                <div class="catalog-grid" id="catalog-grid">
-                    <article class="book-card">
-                        <a href="details.html?id=1" class="book-card__link">
-                            <img src="https://placehold.co/124x119/E3E3E3/474545?text=Okładka" alt="Okładka książki" class="book-card__image">
-                            <div class="book-card__info">
-                                <h3 class="book-card__title">Tytuł Książki</h3>
-                                <p class="book-card__author">Imię Nazwisko Autora</p>
-                                <p class="book-card__rating">Ocena: 8/10</p>
-                            </div>
-                        </a>
-                    </article>
-                    </div>
-                <nav class="pagination" id="pagination-controls">
-                    <a href="#" class="pagination__link pagination__link--active">1</a>
-                    <a href="#" class="pagination__link">2</a>
-                    <a href="#" class="pagination__link">3</a>
-                    <span class="pagination__ellipsis">...</span>
-                    <a href="#" class="pagination__link">67</a>
-                    <a href="#" class="pagination__link">68</a>
-                </nav>
+        <div class="catalog-main-content">
+            <div class="catalog-controls-mobile">
+                <button class="button button--primary" id="mobile-filter-button">Filtruj</button>
+                <button class="button button--primary" id="mobile-sort-button">Sortuj</button>
+            </div>
+            <div class="catalog-grid" id="catalog-grid">
+
+            </div>
+            <nav class="pagination" id="pagination-controls">
+
+            </nav>
+        </div>
+    </div>
+
+    <div class="modal" id="sort-modal">
+        <div class="modal__content">
+            <h3 class="modal__title">Sortuj według</h3>
+            <select id="sort-by-mobile" name="sort-by-mobile" class="modal__select">
+                <option value="title-asc">Tytuł A-Z</option>
+                <option value="title-desc">Tytuł Z-A</option>
+                <option value="rating-desc">Ocena malejąco</option>
+                <option value="rating-asc">Ocena rosnąco</option>
+            </select>
+            <div class="modal__actions">
+                <button class="button button--primary" id="apply-sort-mobile-button">Zastosuj</button>
+                <button class="button button--secondary" id="close-sort-modal-button">Anuluj</button>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <footer class="footer">
-        <div class="footer__container container">
-            <div class="footer__social">
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=FB" alt="Facebook"></a>
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=IG" alt="Instagram"></a>
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=TW" alt="Twitter"></a>
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=LI" alt="LinkedIn"></a>
-            </div>
-            <div class="footer__navigation">
-                <h3 class="footer__section-title">Nawigacja</h3>
-                <ul class="footer__list">
-                    <li class="footer__item"><a href="home.html" class="footer__link">Strona Główna</a></li>
-                    <li class="footer__item"><a href="catalog.html" class="footer__link">Katalog</a></li>
-                    <li class="footer__item"><a href="columns.html" class="footer__link">Polecane</a></li>
-                    <li class="footer__item"><a href="contact.html" class="footer__link">Kontakt</a></li>
-                </ul>
-            </div>
-            <div class="footer__info">
-                <h3 class="footer__section-title">Informacje</h3>
-                <p class="footer__text">&copy; 2025 Katalog Książek</p>
-                <p class="footer__text">Dominik Faliszek 37679</p>
-            </div>
+<footer class="footer">
+    <div class="footer__container container">
+        <div class="footer__social">
+            <a href="#" class="footer__social-link"><img src="../assets/x.png" alt="X"></a>
+            <a href="#" class="footer__social-link"><img src="../assets/instagram.png" alt="Instagram"></a>
+            <a href="#" class="footer__social-link"><img src="../assets/yt.png" alt="YouTube"></a>
+            <a href="#" class="footer__social-link"><img src="../assets/in.png" alt="LinkedIn"></a>
         </div>
-    </footer>
+        <div class="footer__navigation">
+            <h3 class="footer__section-title">Nawigacja</h3>
+            <ul class="footer__list">
+                <li class="footer__item"><a href="home.html" class="footer__link">Strona Główna</a></li>
+                <li class="footer__item"><a href="catalog.html" class="footer__link">Katalog</a></li>
+                <li class="footer__item"><a href="columns.html" class="footer__link">Polecane</a></li>
+                <li class="footer__item"><a href="contact.html" class="footer__link">Kontakt</a></li>
+            </ul>
+        </div>
+        <div class="footer__info">
+            <h3 class="footer__section-title">Informacje</h3>
+            <p class="footer__text">&copy; 2025 Katalog Książek</p>
+            <p class="footer__text">Dominik Faliszek 37679</p>
+        </div>
+    </div>
+</footer>
 
-    <script src="../js/scripts.js"></script>
+<script src="../js/scripts.js"></script>
 </body>
 </html>

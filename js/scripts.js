@@ -1,53 +1,85 @@
-// js/scripts.js
+
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('nav-toggle');
     const navList = document.querySelector('.nav__list');
-    const currentPage = window.location.pathname.split('/').pop() || 'home.html'; // Default to home.html if path is '/'
+    const currentPage = window.location.pathname.split('/').pop() || 'home.html';
 
-    // Mobile navigation toggle
+    const GITHUB_DATA_BASE_URL = 'https://raw.githubusercontent.com/DominikFa/katalog_ksiazek/master/data/';
+
     if (navToggle && navList) {
         navToggle.addEventListener('click', () => {
             navList.classList.toggle('nav__list--active');
         });
     }
 
-    // Active navigation link
     const navLinks = document.querySelectorAll('.nav__list .nav__link');
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
         if (linkHref) {
             const linkPage = linkHref.split('/').pop();
-            if (linkPage === currentPage) {
-                link.classList.add('nav__link--active');
+            if ((linkPage === currentPage) || (currentPage === '' && linkPage === 'home.html')) {
+                if(link) link.classList.add('nav__link--active');
             } else {
-                link.classList.remove('nav__link--active');
+                if(link) link.classList.remove('nav__link--active');
             }
         }
     });
 
-    // --- Base URLs for fetching data ---
-    const GITHUB_DATA_BASE_URL = 'https://raw.githubusercontent.com/DominikFa/katalog_ksiazek/master/data/';
-    // Jeśli gałąź główna to 'main', zmień 'master' na 'main' powyżej.
 
-    // --- Page Specific Logic ---
-
-    // CATALOG PAGE LOGIC
     if (currentPage === 'catalog.html') {
         const catalogGrid = document.getElementById('catalog-grid');
         const authorsFilterList = document.getElementById('authors-filter-list');
         const tagsFilterList = document.getElementById('tags-filter-list');
         const paginationControls = document.getElementById('pagination-controls');
-        const sortBySelect = document.getElementById('sort-by');
-        const applyFiltersButton = document.getElementById('apply-filters-button'); // Desktop/Tablet
-        const mobileFilterButton = document.getElementById('mobile-filter-button'); // Mobile
-        const catalogSidebar = document.querySelector('.catalog-sidebar');
+
+        const sortBySelectDesktop = document.getElementById('sort-by');
+        const sortBySelectMobile = document.getElementById('sort-by-mobile');
+
+        const applyFiltersButton = document.getElementById('apply-filters-button');
+        const mobileFilterButton = document.getElementById('mobile-filter-button');
+        const closeFiltersButton = document.getElementById('close-filters-button');
+        const catalogSidebar = document.getElementById('catalog-sidebar');
+
+        const mobileSortButton = document.getElementById('mobile-sort-button');
+        const sortModal = document.getElementById('sort-modal');
+        const applySortMobileButton = document.getElementById('apply-sort-mobile-button');
+        const closeSortModalButton = document.getElementById('close-sort-modal-button');
+
+
+        const searchAuthorInput = document.getElementById('search-author');
+        const searchTagInput = document.getElementById('search-tag');
 
         let allBooks = [];
         let allAuthors = [];
-        let currentFilters = { authors: [], tags: [] };
-        let currentSort = 'title-asc';
+        let allTagsList = [];
+
+        let selectedFilters = { authors: [], tags: [] };
+        let appliedFilters = { authors: [], tags: [] };
+        let currentSort = sortBySelectDesktop ? sortBySelectDesktop.value : 'title-asc';
         let currentPageNum = 1;
-        const itemsPerPage = 8;
+
+
+        let itemsPerPage = 12;
+
+        function updateItemsPerPage() {
+            if (window.innerWidth <= 767) {
+                itemsPerPage = 4;
+            } else if (window.innerWidth <= 1023) {
+                itemsPerPage = 6;
+            } else {
+                itemsPerPage = 12;
+            }
+        }
+        updateItemsPerPage();
+        window.addEventListener('resize', () => {
+            const oldItemsPerPage = itemsPerPage;
+            updateItemsPerPage();
+            if (oldItemsPerPage !== itemsPerPage) {
+                currentPageNum = 1;
+                renderCatalog();
+            }
+        });
+
 
         async function fetchData() {
             try {
@@ -56,45 +88,77 @@ document.addEventListener('DOMContentLoaded', function() {
                     fetch(`${GITHUB_DATA_BASE_URL}authors.json`)
                 ]);
                 if (!booksRes.ok || !authorsRes.ok) {
-                    throw new Error(`Network response was not ok. Books status: ${booksRes.status}, Authors status: ${authorsRes.status}`);
+                    throw new Error(`Network response was not ok. Books: ${booksRes.status}, Authors: ${authorsRes.status}`);
                 }
                 allBooks = await booksRes.json();
                 allAuthors = await authorsRes.json();
-                populateFilters();
-                renderCatalog();
+                allTagsList = [...new Set(allBooks.flatMap(book => book.tags || []))].sort();
+
+                populateAuthorFilterList(allAuthors);
+                populateTagFilterList(allTagsList);
+
+                applyCurrentFiltersAndSort();
             } catch (error) {
                 console.error("Błąd podczas ładowania danych katalogu:", error);
-                if(catalogGrid) catalogGrid.innerHTML = `<p>Nie udało się załadować katalogu. Sprawdź konsolę po więcej informacji. Możliwe, że pliki danych nie są dostępne pod wskazanym adresem URL lub gałąź ('master' vs 'main') jest nieprawidłowa.</p><p>Sprawdzane URL: ${GITHUB_DATA_BASE_URL}books.json</p>`;
+                if(catalogGrid) catalogGrid.innerHTML = `<p>Nie udało się załadować katalogu. Sprawdź konsolę.</p>`;
             }
         }
 
-        function populateFilters() {
-            if (!authorsFilterList || !tagsFilterList) return;
-
-            authorsFilterList.innerHTML = allAuthors.map(author => `
-                <li><label><input type="checkbox" name="author" value="${author.id}"> ${author.name}</label></li>
+        function populateAuthorFilterList(authorsToDisplay) {
+            if (!authorsFilterList) return;
+            authorsFilterList.innerHTML = authorsToDisplay.map(author => `
+                <li><label><input type="checkbox" name="author" value="${author.id}" ${appliedFilters.authors.includes(author.id) ? 'checked' : ''}> ${author.name}</label></li>
             `).join('');
+        }
 
-            const uniqueTags = [...new Set(allBooks.flatMap(book => book.tags || []))].sort();
-            tagsFilterList.innerHTML = uniqueTags.map(tag => `
-                <li><label><input type="checkbox" name="tag" value="${tag.toLowerCase()}"> ${tag.charAt(0).toUpperCase() + tag.slice(1)}</label></li>
+        function populateTagFilterList(tagsToDisplay) {
+            if (!tagsFilterList) return;
+            tagsFilterList.innerHTML = tagsToDisplay.map(tag => `
+                <li><label><input type="checkbox" name="tag" value="${tag.toLowerCase()}" ${appliedFilters.tags.includes(tag.toLowerCase()) ? 'checked' : ''}> ${tag.charAt(0).toUpperCase() + tag.slice(1)}</label></li>
             `).join('');
+        }
 
-            document.querySelectorAll('.catalog-sidebar input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                     if (window.innerWidth > 767 || !catalogSidebar.classList.contains('catalog-sidebar--active')) {
-                         updateFiltersAndRender();
-                     }
+
+
+        if (searchAuthorInput) {
+            searchAuthorInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredAuthors = allAuthors.filter(author => author.name.toLowerCase().includes(searchTerm));
+                populateAuthorFilterList(filteredAuthors);
+
+                document.querySelectorAll('#authors-filter-list input[name="author"]').forEach(cb => {
+                    if (selectedFilters.authors.includes(parseInt(cb.value))) {
+                        cb.checked = true;
+                    }
                 });
             });
         }
 
-        function updateFiltersAndRender() {
-            currentFilters.authors = Array.from(document.querySelectorAll('.catalog-sidebar input[name="author"]:checked')).map(cb => parseInt(cb.value));
-            currentFilters.tags = Array.from(document.querySelectorAll('.catalog-sidebar input[name="tag"]:checked')).map(cb => cb.value);
+        if (searchTagInput) {
+            searchTagInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredTags = allTagsList.filter(tag => tag.toLowerCase().includes(searchTerm));
+                populateTagFilterList(filteredTags);
+                document.querySelectorAll('#tags-filter-list input[name="tag"]').forEach(cb => {
+                    if (selectedFilters.tags.includes(cb.value)) {
+                        cb.checked = true;
+                    }
+                });
+            });
+        }
+
+
+        function storeSelectedFilters() {
+            selectedFilters.authors = Array.from(document.querySelectorAll('#authors-filter-list input[name="author"]:checked')).map(cb => parseInt(cb.value));
+            selectedFilters.tags = Array.from(document.querySelectorAll('#tags-filter-list input[name="tag"]:checked')).map(cb => cb.value);
+        }
+
+        function applyCurrentFiltersAndSort() {
+
+            appliedFilters = JSON.parse(JSON.stringify(selectedFilters));
             currentPageNum = 1;
             renderCatalog();
-            if(catalogSidebar && catalogSidebar.classList.contains('catalog-sidebar--active')){
+            if (catalogSidebar && catalogSidebar.classList.contains('catalog-sidebar--active')) {
                 catalogSidebar.classList.remove('catalog-sidebar--active');
             }
         }
@@ -118,15 +182,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function filterBooks(books) {
             return books.filter(book => {
-                const authorMatch = currentFilters.authors.length === 0 || currentFilters.authors.includes(book.authorId);
-                const tagMatch = currentFilters.tags.length === 0 || currentFilters.tags.every(tag => book.tags && book.tags.map(t=>t.toLowerCase()).includes(tag));
+                const authorMatch = appliedFilters.authors.length === 0 || appliedFilters.authors.includes(book.authorId);
+                const tagMatch = appliedFilters.tags.length === 0 || appliedFilters.tags.every(tag => book.tags && book.tags.map(t => t.toLowerCase()).includes(tag));
                 return authorMatch && tagMatch;
             });
         }
 
         function renderCatalog() {
-            if (!catalogGrid) return;
-
+             if (!catalogGrid) return;
             let booksToDisplay = filterBooks(allBooks);
             booksToDisplay = sortBooks(booksToDisplay, currentSort);
 
@@ -137,9 +200,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const endIndex = startIndex + itemsPerPage;
             const paginatedBooks = booksToDisplay.slice(startIndex, endIndex);
 
-            if(paginatedBooks.length === 0){
-                catalogGrid.innerHTML = "<p>Brak książek spełniających kryteria.</p>";
-            } else {
+            if(paginatedBooks.length === 0 && totalItems > 0){
+                 catalogGrid.innerHTML = "<p>Brak książek na tej stronie. Spróbuj zmienić stronę.</p>";
+            } else if (totalItems === 0) {
+                 catalogGrid.innerHTML = "<p>Brak książek spełniających kryteria.</p>";
+            }
+            else {
                 catalogGrid.innerHTML = paginatedBooks.map(book => {
                     const author = allAuthors.find(a => a.id === book.authorId);
                     return `
@@ -159,49 +225,79 @@ document.addEventListener('DOMContentLoaded', function() {
             renderPagination(totalPages);
         }
 
+
         function renderPagination(totalPages) {
             if (!paginationControls) return;
             paginationControls.innerHTML = '';
             if (totalPages <= 1) return;
 
-            let paginationHTML = '';
-            const maxVisibleButtons = 5;
+            const
+         SPREAD = 1;
+            const MAX_VISIBLE_BUTTONS_AROUND_CURRENT = SPREAD * 2 + 1;
 
-            if (totalPages <= maxVisibleButtons) {
-                for (let i = 1; i <= totalPages; i++) {
-                    paginationHTML += `<a href="#" class="pagination__link ${i === currentPageNum ? 'pagination__link--active' : ''}" data-page="${i}">${i}</a>`;
-                }
-            } else {
-                paginationHTML += `<a href="#" class="pagination__link ${1 === currentPageNum ? 'pagination__link--active' : ''}" data-page="1">1</a>`;
-
-                let pageStart = Math.max(2, currentPageNum - 1);
-                let pageEnd = Math.min(totalPages - 1, currentPageNum + 1);
-
-                if (currentPageNum <= 3) { // Near the beginning
-                    pageStart = 2;
-                    pageEnd = Math.min(totalPages -1, 1 + (maxVisibleButtons - 3)); // 1 (first) + ... + pages + last
-                } else if (currentPageNum >= totalPages - 2) { // Near the end
-                    pageEnd = totalPages -1;
-                    pageStart = Math.max(2, totalPages - (maxVisibleButtons - 3));
-                }
+            let pages = [];
 
 
-                if (pageStart > 2) {
-                    paginationHTML += `<span class="pagination__ellipsis">...</span>`;
-                }
+            pages.push({ page: 1, text: '1', active: currentPageNum === 1 });
 
-                for (let i = pageStart; i <= pageEnd; i++) {
-                     paginationHTML += `<a href="#" class="pagination__link ${i === currentPageNum ? 'pagination__link--active' : ''}" data-page="${i}">${i}</a>`;
-                }
 
-                if (pageEnd < totalPages - 1) {
-                     paginationHTML += `<span class="pagination__ellipsis">...</span>`;
-                }
+            let rangeStart = Math.max(2, currentPageNum - SPREAD);
+            let rangeEnd = Math.min(totalPages - 1, currentPageNum + SPREAD);
 
-                paginationHTML += `<a href="#" class="pagination__link ${totalPages === currentPageNum ? 'pagination__link--active' : ''}" data-page="${totalPages}">${totalPages}</a>`;
+
+            if (rangeStart > 2) {
+                pages.push({ text: '...', isEllipsis: true });
             }
 
-            paginationControls.innerHTML = paginationHTML;
+
+            for (let i = rangeStart; i <= rangeEnd; i++) {
+
+                if (i === 1 && totalPages > 1) continue;
+                if (i === totalPages && totalPages > 1) continue;
+                pages.push({ page: i, text: i.toString(), active: currentPageNum === i });
+            }
+
+
+            if (rangeEnd < totalPages - 1) {
+                pages.push({ text: '...', isEllipsis: true });
+            }
+
+
+            if (totalPages > 1) {
+                pages.push({ page: totalPages, text: totalPages.toString(), active: currentPageNum === totalPages });
+            }
+
+
+            let uniqueButtons = [];
+            const seen = new Set();
+            for (const btn of pages) {
+                if (btn.isEllipsis) {
+
+                    if (uniqueButtons.length === 0 || !uniqueButtons[uniqueButtons.length - 1].isEllipsis) {
+                        uniqueButtons.push(btn);
+                    }
+                } else if (!seen.has(btn.page)) {
+                    uniqueButtons.push(btn);
+                    seen.add(btn.page);
+                }
+            }
+
+
+            if (uniqueButtons.length > 1 && uniqueButtons[1].isEllipsis && uniqueButtons[0].page + 1 === uniqueButtons[2]?.page) {
+                uniqueButtons.splice(1, 1);
+            }
+            if (uniqueButtons.length > 2 && uniqueButtons[uniqueButtons.length - 2].isEllipsis && uniqueButtons[uniqueButtons.length - 1].page - 1 === uniqueButtons[uniqueButtons.length - 3]?.page) {
+                uniqueButtons.splice(uniqueButtons.length - 2, 1);
+            }
+
+
+            paginationControls.innerHTML = uniqueButtons.map(btn => {
+                if (btn.isEllipsis) {
+                    return `<span class="pagination__ellipsis">${btn.text}</span>`;
+                }
+                return `<a href="#" class="pagination__link ${btn.active ? 'pagination__link--active' : ''}" data-page="${btn.page}">${btn.text}</a>`;
+            }).join('');
+
             document.querySelectorAll('.pagination__link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -216,30 +312,71 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        if (sortBySelect) {
-            sortBySelect.addEventListener('change', (e) => {
+
+        if (sortBySelectDesktop) {
+            sortBySelectDesktop.addEventListener('change', (e) => {
                 currentSort = e.target.value;
-                currentPageNum = 1;
-                renderCatalog();
+                if (sortBySelectMobile) sortBySelectMobile.value = currentSort;
+                applyCurrentFiltersAndSort();
             });
         }
 
-        if (applyFiltersButton && window.innerWidth > 767) {
-            applyFiltersButton.addEventListener('click', updateFiltersAndRender);
-        } else if (applyFiltersButton && window.innerWidth <= 767) { // For mobile, this button is inside the toggled sidebar
-             applyFiltersButton.addEventListener('click', updateFiltersAndRender);
+        if (applyFiltersButton) {
+            applyFiltersButton.addEventListener('click', () => {
+                storeSelectedFilters();
+                applyCurrentFiltersAndSort();
+            });
         }
 
-
-        if (mobileFilterButton && catalogSidebar) {
+        if (mobileFilterButton && catalogSidebar && closeFiltersButton) {
             mobileFilterButton.addEventListener('click', () => {
-                catalogSidebar.classList.toggle('catalog-sidebar--active');
+
+                document.querySelectorAll('#authors-filter-list input[name="author"]').forEach(cb => {
+                    cb.checked = appliedFilters.authors.includes(parseInt(cb.value));
+                });
+                document.querySelectorAll('#tags-filter-list input[name="tag"]').forEach(cb => {
+                    cb.checked = appliedFilters.tags.includes(cb.value);
+                });
+
+                if(searchAuthorInput) searchAuthorInput.value = '';
+                if(searchTagInput) searchTagInput.value = '';
+                populateAuthorFilterList(allAuthors);
+                populateTagFilterList(allTagsList);
+
+
+                catalogSidebar.classList.add('catalog-sidebar--active');
+            });
+            closeFiltersButton.addEventListener('click', () => {
+                catalogSidebar.classList.remove('catalog-sidebar--active');
+
             });
         }
+
+        if (mobileSortButton && sortModal && sortBySelectMobile && applySortMobileButton && closeSortModalButton) {
+            mobileSortButton.addEventListener('click', () => {
+                sortBySelectMobile.value = currentSort;
+                sortModal.classList.add('modal--active');
+            });
+            closeSortModalButton.addEventListener('click', () => {
+                sortModal.classList.remove('modal--active');
+            });
+            applySortMobileButton.addEventListener('click', () => {
+                currentSort = sortBySelectMobile.value;
+                if (sortBySelectDesktop) sortBySelectDesktop.value = currentSort;
+                sortModal.classList.remove('modal--active');
+                applyCurrentFiltersAndSort();
+            });
+            sortModal.addEventListener('click', (e) => {
+                if (e.target === sortModal) {
+                    sortModal.classList.remove('modal--active');
+                }
+            });
+        }
+
         fetchData();
     }
 
-    // DETAILS PAGE LOGIC
+
     if (currentPage === 'details.html') {
         const params = new URLSearchParams(window.location.search);
         const bookId = parseInt(params.get('id'));
@@ -296,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchBookDetails();
     }
 
-    // COLUMNS PAGE (RÓŻNE) LOGIC
+
     if (currentPage === 'columns.html') {
         const quotesList = document.getElementById('quotes-list');
         const recommendedBooksList = document.getElementById('recommended-books-list');
@@ -336,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchColumnsData();
     }
 
-    // CONTACT PAGE LOGIC
+
     if (currentPage === 'contact.html') {
         const contactForm = document.getElementById('contact-form');
         const formStatusMessage = document.getElementById('form-status-message');
@@ -373,5 +510,5 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    console.log(`Strona: ${currentPage}. Skrypty załadowane. Używana baza URL danych: ${GITHUB_DATA_BASE_URL}`);
+    console.log(`Strona: ${currentPage}. Skrypty załadowane.`);
 });

@@ -9,39 +9,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header class="header">
-        <nav class="nav container">
-            <a href="home.html" class="nav__logo">LOGO</a>
-            <ul class="nav__list">
-                <li class="nav__item"><a href="home.html" class="nav__link">Strona Główna</a></li>
-                <li class="nav__item"><a href="catalog.html" class="nav__link">Katalog</a></li>
-                <li class="nav__item"><a href="columns.html" class="nav__link">Różne</a></li>
-                <li class="nav__item"><a href="contact.html" class="nav__link">Kontakt</a></li>
-            </ul>
-            <div class="nav__mobile-toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+<body class="details-page-body">
+<header class="header">
+    <nav class="nav container">
+        <ul class="nav__list">
+            <li class="nav__item"><a href="home.html" class="nav__link">Strona Główna</a></li>
+            <li class="nav__item"><a href="catalog.html" class="nav__link">Katalog</a></li>
+            <li class="nav__item"><a href="columns.html" class="nav__link">Różne</a></li>
+            <li class="nav__item"><a href="contact.html" class="nav__link">Kontakt</a></li>
+        </ul>
+        <div class="nav__mobile-toggle" id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
 
-    <main class="main">
-        <article class="book-details-container container" id="book-details-content">
-            <div class="book-details__header">
-                <img src="https://placehold.co/395x376/E3E3E3/474545?text=Okładka" alt="Okładka książki" class="book-details__image" id="book-image">
-                <div class="book-details__main-info">
-                    <h1 class="book-details__title" id="book-title">Tytuł Książki</h1>
-                    <p class="book-details__author" id="book-author">Autor Książki</p>
-                    <a href="#" class="button button--primary book-details__back-button" id="back-button">Powrót</a>
+<main class="main">
+    <article class="details-container container" id="details-content">
+        <div class="details__top-layout">
+            <div class="details__image-column">
+                <img src="https://placehold.co/320x480/E3E3E3/474545?text=Okładka" alt="Okładka książki" class="details__image" id="book-image">
+            </div>
+            <div class="details__info-column">
+                <div class="details__info-header">
+                    <div class="details__title-author-group">
+                        <h1 class="details__title" id="book-title">Tytuł Książki</h1>
+                        <p class="details__author" id="book-author">Autor Książki</p>
+                    </div>
+                    <a href="#" class="button button--primary details__back-button" id="back-button-desktop">Powrót</a>
                 </div>
-            </div>
-
-            <div class="book-details__body">
-                <div class="book-details__specifics">
-                    <h2 class="book-details__section-title">Szczegóły:</h2>
-                    <ul class="book-details__specifics-list">
+                <div class="details__specifics">
+                    <h2 class="details__section-title">Szczegóły:</h2>
+                    <ul class="details__specifics-list">
                         <li><strong>Data wydania:</strong> <span id="book-release-date">YYYY-MM-DD</span></li>
                         <li><strong>Język:</strong> <span id="book-language">Polski</span></li>
                         <li><strong>Liczba stron:</strong> <span id="book-pages">300</span></li>
@@ -49,46 +50,53 @@
                         <li><strong>Gatunki:</strong> <span id="book-genres">Gatunek 1, Gatunek 2</span></li>
                     </ul>
                 </div>
-                 <a href="#" class="button button--secondary book-details__download-button" id="download-pdf-button">
-                    <span class="book-details__download-icon"></span> POBIERZ PDF
+                <a href="#" class="button button--secondary details__download-button" id="download-pdf-button-desktop">
+                    <span class="details__download-icon"></span> POBIERZ PDF
                 </a>
             </div>
-
-            <div class="book-details__description">
-                <h2 class="book-details__section-title">Opis książki</h2>
-                <p id="book-description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec justo eget mauris posuere blandit.
-                    Vivamus eget eros sodales, auctor quam vel, fermentum elit. Integer nec magna vitae velit faucibus commodo.
-                </p>
-            </div>
-        </article>
-    </main>
-
-    <footer class="footer">
-        <div class="footer__container container">
-            <div class="footer__social">
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=FB" alt="Facebook"></a>
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=IG" alt="Instagram"></a>
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=TW" alt="Twitter"></a>
-                <a href="#" class="footer__social-link"><img src="https://placehold.co/24x24/1E1E1E/FFFFFF?text=LI" alt="LinkedIn"></a>
-            </div>
-            <div class="footer__navigation">
-                <h3 class="footer__section-title">Nawigacja</h3>
-                <ul class="footer__list">
-                    <li class="footer__item"><a href="home.html" class="footer__link">Strona Główna</a></li>
-                    <li class="footer__item"><a href="catalog.html" class="footer__link">Katalog</a></li>
-                    <li class="footer__item"><a href="columns.html" class="footer__link">Polecane</a></li>
-                    <li class="footer__item"><a href="contact.html" class="footer__link">Kontakt</a></li>
-                </ul>
-            </div>
-            <div class="footer__info">
-                <h3 class="footer__section-title">Informacje</h3>
-                <p class="footer__text">&copy; 2025 Katalog Książek</p>
-                <p class="footer__text">Dominik Faliszek 37679</p>
-            </div>
         </div>
-    </footer>
+        <div class="details__description-section">
+            <h2 class="details__section-title">Opis książki</h2>
+            <p id="book-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec justo eget mauris posuere blandit.
+                Vivamus eget eros sodales, auctor quam vel, fermentum elit. Integer nec magna vitae velit faucibus commodo.
+                Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
+            </p>
+        </div>
+        <div class="details__actions-mobile-tablet">
+            <a href="#" class="button button--secondary details__download-button-mobile-tablet" id="download-pdf-button-mobile-tablet">
+                <span class="details__download-icon"></span> POBIERZ PDF
+            </a>
+            <a href="#" class="button button--primary details__back-button-mobile-tablet" id="back-button-mobile-tablet">Powrót</a>
+        </div>
+    </article>
+</main>
 
-    <script src="../js/scripts.js"></script>
+<footer class="footer">
+    <div class="footer__container container">
+        <div class="footer__social">
+            <a href="#" class="footer__social-link"><img src="../assets/x.png" alt="X"></a>
+            <a href="#" class="footer__social-link"><img src="../assets/instagram.png" alt="Instagram"></a>
+            <a href="#" class="footer__social-link"><img src="../assets/yt.png" alt="YouTube"></a>
+            <a href="#" class="footer__social-link"><img src="../assets/in.png" alt="LinkedIn"></a>
+        </div>
+        <div class="footer__navigation">
+            <h3 class="footer__section-title">Nawigacja</h3>
+            <ul class="footer__list">
+                <li class="footer__item"><a href="home.html" class="footer__link">Strona Główna</a></li>
+                <li class="footer__item"><a href="catalog.html" class="footer__link">Katalog</a></li>
+                <li class="footer__item"><a href="columns.html" class="footer__link">Różne</a></li>
+                <li class="footer__item"><a href="contact.html" class="footer__link">Kontakt</a></li>
+            </ul>
+        </div>
+        <div class="footer__info">
+            <h3 class="footer__section-title">Informacje</h3>
+            <p class="footer__text">&copy; 2025 Katalog Książek</p>
+            <p class="footer__text">Dominik Faliszek 37679</p>
+        </div>
+    </div>
+</footer>
+
+<script src="../js/scripts.js"></script>
 </body>
 </html>
