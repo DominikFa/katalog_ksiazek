@@ -379,13 +379,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentPage === 'details.html') {
         const params = new URLSearchParams(window.location.search);
         const bookId = parseInt(params.get('id'));
-        const contentArea = document.getElementById('details-content'); // Corrected to match HTML structure
+        const contentArea = document.getElementById('details-content');
 
         async function fetchBookDetails() {
-            // The contentArea check needs to be more specific if an error occurs before it's found
-            // For instance, if 'details-content' is not in the DOM for some reason.
-            if (!bookId) { // Check for bookId first
-                if(document.getElementById('details-content')) { // Check if contentArea exists before manipulating
+
+            if (!bookId) {
+                if(document.getElementById('details-content')) {
                      document.getElementById('details-content').innerHTML = "<p>Nieprawidłowy identyfikator książki.</p>";
                 } else {
                     console.error("Element 'details-content' not found. Cannot display error message.");
@@ -429,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Corrected Back Button Logic
+
         const backButtonDesktop = document.getElementById('back-button-desktop');
         const backButtonMobileTablet = document.getElementById('back-button-mobile-tablet');
 
@@ -444,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (backButtonMobileTablet) {
             backButtonMobileTablet.addEventListener('click', navigateBackToCatalog);
         }
-        // End of Corrected Back Button Logic
+
 
         fetchBookDetails();
     }
@@ -908,13 +907,12 @@ document.addEventListener('DOMContentLoaded', function() {
        if (currentPage === 'details.html') {
            const params = new URLSearchParams(window.location.search);
            const bookId = parseInt(params.get('id'));
-           const contentArea = document.getElementById('details-content'); // Corrected to match HTML structure
+           const contentArea = document.getElementById('details-content');
 
            async function fetchBookDetails() {
-               // The contentArea check needs to be more specific if an error occurs before it's found
-               // For instance, if 'details-content' is not in the DOM for some reason.
-               if (!bookId) { // Check for bookId first
-                   if(document.getElementById('details-content')) { // Check if contentArea exists before manipulating
+
+               if (!bookId) {
+                   if(document.getElementById('details-content')) {
                         document.getElementById('details-content').innerHTML = "<p>Nieprawidłowy identyfikator książki.</p>";
                    } else {
                        console.error("Element 'details-content' not found. Cannot display error message.");
@@ -958,7 +956,7 @@ document.addEventListener('DOMContentLoaded', function() {
                }
            }
 
-           // Corrected Back Button Logic
+
            const backButtonDesktop = document.getElementById('back-button-desktop');
            const backButtonMobileTablet = document.getElementById('back-button-mobile-tablet');
 
@@ -973,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function() {
            if (backButtonMobileTablet) {
                backButtonMobileTablet.addEventListener('click', navigateBackToCatalog);
            }
-           // End of Corrected Back Button Logic
+
 
            fetchBookDetails();
        }
