@@ -194,8 +194,7 @@ button {
 /* Main Content Area */
 .main {
     flex-grow: 1;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 45px;
 }
 
 .main > section, .main > div, .main > article {
@@ -203,7 +202,6 @@ button {
     border-radius: var(--border-radius-container);
     outline: 1px solid var(--border-color-container-outline);
     padding: 30px;
-    margin-bottom: 30px;
 }
 .main > section:last-child, .main > div:last-child {
     margin-bottom: 0;
@@ -375,6 +373,10 @@ button {
     color: var(--text-color-primary);
 }
 
+#catalog-main{
+    flex-grow: 1;
+    padding: 45px;
+}
 
 .catalog-sidebar__section {
     margin-bottom: 20px;

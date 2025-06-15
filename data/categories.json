@@ -1,46 +1,16 @@
 [
-  {
-    "id": 1,
-    "name": "Fantastyka"
-  },
-  {
-    "id": 2,
-    "name": "Science Fiction"
-  },
-  {
-    "id": 3,
-    "name": "Kryminał"
-  },
-  {
-    "id": 4,
-    "name": "Romans"
-  },
-  {
-    "id": 5,
-    "name": "Literatura faktu"
-  },
-  {
-    "id": 6,
-    "name": "Klasyka"
-  },
-  {
-    "id": 7,
-    "name": "Młodzieżowa"
-  },
-  {
-    "id": 8,
-    "name": "Dziecięca"
-  },
-  {
-    "id": 9,
-    "name": "Powieść Historyczna"
-  },
-  {
-    "id": 10,
-    "name": "Thriller psychologiczny"
-  },
-  {
-    "id": 11,
-    "name": "Poezja"
-  }
+  { "id": 1, "name": "Klasyka" },
+  { "id": 2, "name": "Powieść historyczna" },
+  { "id": 3, "name": "Science Fiction" },
+  { "id": 4, "name": "Powieść psychologiczna" },
+  { "id": 5, "name": "Dystopia" },
+  { "id": 6, "name": "Realizm magiczny" },
+  { "id": 7, "name": "Powieść realistyczna" },
+  { "id": 8, "name": "Dramat" },
+  { "id": 9, "name": "Poezja" },
+  { "id": 10, "name": "Literatura faktu" },
+  { "id": 11, "name": "Romans" },
+  { "id": 12, "name": "Fantastyka" },
+  { "id": 13, "name": "Filozofia" },
+  { "id": 14, "name": "Groteska" }
 ]
