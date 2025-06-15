@@ -387,14 +387,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 document.getElementById('book-title').textContent = book.title;
                 document.getElementById('book-author').textContent = author ? author.name : 'Nieznany autor';
-                
+
                 const bookImageElement = document.getElementById('book-image');
                 if (bookImageElement) {
                     const placeholder = 'https://placehold.co/395x376/E3E3E3/474545?text=Brak+Obrazka';
                     bookImageElement.src = book.imageUrl || placeholder;
                     bookImageElement.alt = `Okładka: ${book.title}`;
                     bookImageElement.onerror = () => {
-                        bookImageElement.onerror = null; 
+                        bookImageElement.onerror = null;
                         bookImageElement.src = placeholder;
                     };
                 }
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('book-rating').textContent = book.rating !== undefined ? `${book.rating}/10` : 'Brak oceny';
                 document.getElementById('book-genres').textContent = book.genres && book.genres.length > 0 ? book.genres.join(', ') : 'Brak danych';
                 document.getElementById('book-description').textContent = book.description || 'Brak opisu.';
-                
+
                 const downloadButtonDesktop = document.getElementById('download-pdf-button-desktop');
                 const downloadButtonMobile = document.getElementById('download-pdf-button-mobile-tablet');
 
@@ -415,14 +415,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             button.href = book.pdfDownload;
                             button.setAttribute('target', '_blank');
                             button.setAttribute('download', `${book.title.replace(/[\s/]/g, '_')}.pdf`);
-                            button.style.display = 'flex';
                         }
                     };
                     setupDownloadButton(downloadButtonDesktop);
                     setupDownloadButton(downloadButtonMobile);
-                } else {
-                    if (downloadButtonDesktop) downloadButtonDesktop.style.display = 'none';
-                    if (downloadButtonMobile) downloadButtonMobile.style.display = 'none';
                 }
 
             } catch (error) {

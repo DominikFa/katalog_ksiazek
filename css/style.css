@@ -901,7 +901,6 @@ button {
 @media (max-width: 1023px) {
     .catalog-layout {
         padding: 15px;
-        margin: 20px;
     }
     .columns-page-container {
         padding: 15px;
@@ -1008,7 +1007,7 @@ button {
 
     /* Details Tablet */
     .details-container {
-        margin: 20px;
+
     }
 
     .details-page-body .details__top-layout {
@@ -1105,7 +1104,6 @@ button {
     /* Contact Tablet */
     .contact-form-container {
         padding: 20px;
-        margin: 20px;
     }
     .contact-form {
         gap: 20px;
@@ -1388,7 +1386,6 @@ button {
     /* Columns (Różne) Mobile */
     .columns-page-container {
       padding: 15px;
-      margin: 20px;
     }
     .columns-layout {
         flex-direction: column;
